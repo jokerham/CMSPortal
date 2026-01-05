@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-cmsportal-dev-11dff-authRole",
+      "UnauthRoleArn": "arn:aws:iam::785455635280:role/amplify-cmsportal-dev-11dff-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::785455635280:role/amplify-cmsportal-dev-11dff-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-cmsportal-dev-11dff-deployment",
+      "UnauthRoleName": "amplify-cmsportal-dev-11dff-unauthRole",
+      "StackName": "amplify-cmsportal-dev-11dff",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:785455635280:stack/amplify-cmsportal-dev-11dff/b1db72e0-e9ca-11f0-97c5-0ab0e476f4e5",
+      "AmplifyAppId": "d1hfqqfo9a34tb"
+    }
+  }
+}
