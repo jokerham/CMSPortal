@@ -65,14 +65,36 @@ export default function Signup() {
       // If confirmation is required, go to confirm step
       if (res.nextStep.signUpStep === 'CONFIRM_SIGN_UP') {
         setStep('confirm');
-        setInfo('A confirmation code was sent. Please enter it to verify your account.');
+        setInfo('A confirmation code was sent to your email. Please enter it to verify your account.');
+      } else if (res.nextStep.signUpStep === 'DONE') {
+        // User is already confirmed and signed up
+        setInfo('Account created. You can sign in now.');
+        navigate('/login', { replace: true });
       } else {
-        // Rare case: user is already confirmed
+        // Handle other cases
         setInfo('Account created. You can sign in now.');
         navigate('/login', { replace: true });
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Signup failed');
+      // Handle specific Cognito errors
+      if (err instanceof Error) {
+        const errorMessage = err.message;
+
+        // Check for common Cognito error scenarios
+        if (errorMessage.includes('UsernameExistsException') ||
+            errorMessage.includes('User already exists') ||
+            errorMessage.includes('An account with the given email already exists')) {
+          setError('An account with this username or email already exists. Please try logging in or use a different email.');
+        } else if (errorMessage.includes('InvalidPasswordException')) {
+          setError('Password does not meet requirements. Please use a stronger password.');
+        } else if (errorMessage.includes('InvalidParameterException')) {
+          setError('Invalid input. Please check your email and password.');
+        } else {
+          setError(errorMessage);
+        }
+      } else {
+        setError('Signup failed. Please try again.');
+      }
     } finally {
       setLoading(false);
     }

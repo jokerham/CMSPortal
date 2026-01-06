@@ -10,6 +10,11 @@
       "StackName": "amplify-cmsportal-dev-11dff",
       "StackId": "arn:aws:cloudformation:ap-northeast-2:785455635280:stack/amplify-cmsportal-dev-11dff/b1db72e0-e9ca-11f0-97c5-0ab0e476f4e5",
       "AmplifyAppId": "d1hfqqfo9a34tb"
+    },
+    "categories": {
+      "auth": {
+        "cmsportal30960b77": {}
+      }
     }
   }
 }
