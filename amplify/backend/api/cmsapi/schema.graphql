@@ -1,0 +1,559 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+input AMPLIFY { globalAuthRule: AuthRule = { allow: public } } # FOR TESTING ONLY!
+
+# ==========================================
+# Content Management Portal - GraphQL Schema
+# AWS Amplify GraphQL Transformer v2
+# ==========================================
+
+# ==========================================
+# Member & Authentication Models
+# ==========================================
+
+type MemberProfile
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: owner, ownerField: "id", operations: [read, update] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  email: String! @index(name: "byEmail", queryField: "memberProfilesByEmail")
+  displayName: String!
+  avatarS3Key: String
+  roleId: ID! @index(name: "byRole")
+  role: Role @belongsTo(fields: ["roleId"])
+  createdAt: AWSDateTime!
+  lastLoginAt: AWSDateTime
+  isActive: Boolean!
+  
+  # Cached permissions for performance
+  cachedPermissions: [String]
+  permissionsCachedAt: AWSDateTime
+  
+  # Relationships
+  posts: [Post] @hasMany(indexName: "byAuthor", fields: ["id"])
+  comments: [Comment] @hasMany(indexName: "byAuthor", fields: ["id"])
+  events: [Event] @hasMany(indexName: "byCreator", fields: ["id"])
+  articles: [Article] @hasMany(indexName: "byAuthor", fields: ["id"])
+  uploadedAttachments: [Attachment] @hasMany(indexName: "byUploader", fields: ["id"])
+}
+
+type Role
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  name: String! @index(name: "byName", queryField: "rolesByName")
+  description: String
+  isSystemRole: Boolean!
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  
+  permissions: [RolePermission] @hasMany(indexName: "byRole", fields: ["id"])
+  members: [MemberProfile] @hasMany(indexName: "byRole", fields: ["id"])
+}
+
+type Permission
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  moduleType: String! @index(name: "byModuleType", sortKeyFields: ["permissionKey"])
+  permissionKey: String!
+  displayName: String!
+  description: String
+  category: String!
+  
+  rolePermissions: [RolePermission] @hasMany(indexName: "byPermission", fields: ["id"])
+}
+
+type RolePermission
+  @model
+  @auth(rules: [{ allow: groups, groups: ["Admin"] }])
+{
+  id: ID!
+  roleId: ID! @index(name: "byRole")
+  permissionId: ID! @index(name: "byPermission")
+  
+  role: Role @belongsTo(fields: ["roleId"])
+  permission: Permission @belongsTo(fields: ["permissionId"])
+}
+
+# ==========================================
+# Menu & Layout Models
+# ==========================================
+
+type Menu
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  parentMenuId: ID @index(name: "byParentMenu", sortKeyFields: ["order"])
+  title: String!
+  slug: String! @index(name: "bySlug", queryField: "getMenuBySlug")
+  order: Int!
+  isVisible: Boolean!
+  
+  # Module association
+  moduleConfigId: ID @index(name: "byModuleConfig")
+  moduleConfig: ModuleConfig @belongsTo(fields: ["moduleConfigId"])
+  
+  # Layout assignment (optional, overrides default)
+  layoutId: ID @index(name: "byLayout")
+  layout: Layout @belongsTo(fields: ["layoutId"])
+  
+  # Relationships
+  parentMenu: Menu @belongsTo(fields: ["parentMenuId"])
+  childMenus: [Menu] @hasMany(indexName: "byParentMenu", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type ModuleConfig
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  moduleType: String! @index(name: "byModuleType")
+  displayName: String!
+  moduleSettings: AWSJSON!
+  
+  menus: [Menu] @hasMany(indexName: "byModuleConfig", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Layout
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  name: String!
+  description: String
+  templateId: String!
+  isDefault: Boolean!
+  
+  # Region configurations (JSON)
+  regionConfigs: AWSJSON!
+  
+  menus: [Menu] @hasMany(indexName: "byLayout", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+# ==========================================
+# Article Module
+# ==========================================
+
+type Article
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: owner, ownerField: "authorId", operations: [create, read, update, delete] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  title: String!
+  content: String!
+  slug: String! @index(name: "bySlug", queryField: "getArticleBySlug")
+  
+  authorId: ID! @index(name: "byAuthor", sortKeyFields: ["createdAt"])
+  author: MemberProfile @belongsTo(fields: ["authorId"])
+  viewCount: Int!
+  
+  attachments: [Attachment] @hasMany(indexName: "byArticle", fields: ["id"])
+  
+  publishedAt: AWSDateTime
+  isPublished: Boolean!
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+# ==========================================
+# Board Module
+# ==========================================
+
+type Board
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  name: String!
+  description: String
+  slug: String! @index(name: "bySlug", queryField: "getBoardBySlug")
+  
+  customFieldDefinitions: AWSJSON
+  defaultSortField: String
+  defaultSortOrder: String
+  postsPerPage: Int!
+  permissionScope: String!
+  
+  categories: [Category] @hasMany(indexName: "byBoard", fields: ["id"])
+  posts: [Post] @hasMany(indexName: "byBoard", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Category
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  boardId: ID! @index(name: "byBoard", sortKeyFields: ["order"])
+  name: String!
+  slug: String!
+  description: String
+  order: Int!
+  
+  board: Board @belongsTo(fields: ["boardId"])
+  posts: [Post] @hasMany(indexName: "byCategory", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Post
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: owner, ownerField: "authorId", operations: [create, read, update, delete] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  # Primary boardId index for general queries and various sort options
+  boardId: ID! 
+    @index(name: "byBoard", sortKeyFields: ["createdAt"])
+    @index(name: "byBoardViewCount", sortKeyFields: ["viewCount"])
+    @index(name: "byBoardCustomSort1", sortKeyFields: ["customSort1"])
+    @index(name: "byBoardCustomSort2", sortKeyFields: ["customSort2"])
+    @index(name: "byBoardCustomSort3", sortKeyFields: ["customSort3"])
+    @index(name: "byBoardCustomSort4", sortKeyFields: ["customSort4"])
+    @index(name: "byBoardCustomSort5", sortKeyFields: ["customSort5"])
+    
+  categoryId: ID @index(name: "byCategory", sortKeyFields: ["createdAt"])
+  
+  title: String!
+  content: String!
+  
+  authorId: ID! @index(name: "byAuthor", sortKeyFields: ["createdAt"])
+  author: MemberProfile @belongsTo(fields: ["authorId"])
+  
+  viewCount: Int!
+  
+  customFieldValues: AWSJSON
+  customSort1: String
+  customSort2: String
+  customSort3: String
+  customSort4: String
+  customSort5: String
+  
+  board: Board @belongsTo(fields: ["boardId"])
+  category: Category @belongsTo(fields: ["categoryId"])
+  tags: [PostTag] @hasMany(indexName: "byPost", fields: ["id"])
+  attachments: [Attachment] @hasMany(indexName: "byPost", fields: ["id"])
+  comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+  
+  publishedAt: AWSDateTime
+  isPublished: Boolean!
+  isPinned: Boolean!
+  pinnedStatus: String! @index(name: "byBoardPinned", sortKeyFields: ["boardId", "createdAt"])
+  # pinnedStatus values: "pinned" | "normal" - allows sorting pinned posts first
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Tag
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read, create], provider: userPools }
+  ])
+{
+  id: ID!
+  name: String! @index(name: "byName", queryField: "tagsByName")
+  slug: String! @index(name: "bySlug", queryField: "tagsBySlug")
+  
+  posts: [PostTag] @hasMany(indexName: "byTag", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+}
+
+type PostTag
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: owner, ownerField: "authorId", operations: [create, delete] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  postId: ID! @index(name: "byPost")
+  tagId: ID! @index(name: "byTag")
+  
+  post: Post @belongsTo(fields: ["postId"])
+  tag: Tag @belongsTo(fields: ["tagId"])
+}
+
+type Comment
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: owner, ownerField: "authorId", operations: [create, read, update, delete] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  postId: ID! @index(name: "byPost", sortKeyFields: ["threadPath"])
+  parentCommentId: ID @index(name: "byParentComment", sortKeyFields: ["createdAt"])
+  
+  content: String!
+  
+  authorId: ID! @index(name: "byAuthor", sortKeyFields: ["createdAt"])
+  author: MemberProfile @belongsTo(fields: ["authorId"])
+  
+  depth: Int!
+  threadPath: String!
+  
+  post: Post @belongsTo(fields: ["postId"])
+  parentComment: Comment @belongsTo(fields: ["parentCommentId"])
+  replies: [Comment] @hasMany(indexName: "byParentComment", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  isDeleted: Boolean!
+}
+
+# ==========================================
+# Calendar Module
+# ==========================================
+
+type Calendar
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  name: String!
+  description: String
+  slug: String! @index(name: "bySlug", queryField: "getCalendarBySlug")
+  defaultView: String!
+  
+  events: [Event] @hasMany(indexName: "byCalendar", fields: ["id"])
+  mailAccountLinks: [MailAccountLink] @hasMany(indexName: "byCalendar", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+type Event
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
+    { allow: owner, ownerField: "creatorId", operations: [create, read, update, delete] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  calendarId: ID! @index(name: "byCalendar", sortKeyFields: ["startDateTime"])
+  
+  title: String!
+  description: String
+  location: String
+  
+  startDateTime: AWSDateTime!
+  endDateTime: AWSDateTime!
+  isAllDay: Boolean!
+  recurrenceRule: String
+  
+  sourceType: String!
+  sourceEventId: String
+  mailAccountLinkId: ID @index(name: "byMailAccountLink", sortKeyFields: ["startDateTime"])
+  
+  colorHex: String
+  
+  creatorId: ID @index(name: "byCreator", sortKeyFields: ["startDateTime"])
+  creator: MemberProfile @belongsTo(fields: ["creatorId"])
+  
+  calendar: Calendar @belongsTo(fields: ["calendarId"])
+  mailAccountLink: MailAccountLink @belongsTo(fields: ["mailAccountLinkId"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+  lastSyncedAt: AWSDateTime
+}
+
+type MailAccountLink
+  @model
+  @auth(rules: [{ allow: groups, groups: ["Admin"] }])
+{
+  id: ID!
+  calendarId: ID! @index(name: "byCalendar")
+  
+  accountType: String!
+  accountEmail: String! @index(name: "byAccountEmail", queryField: "mailAccountLinksByEmail")
+  
+  encryptedAccessToken: String!
+  encryptedRefreshToken: String!
+  tokenExpiresAt: AWSDateTime!
+  
+  displayName: String!
+  colorHex: String!
+  
+  isActive: Boolean!
+  lastSyncedAt: AWSDateTime
+  lastSyncStatus: String
+  lastSyncError: String
+  
+  calendar: Calendar @belongsTo(fields: ["calendarId"])
+  events: [Event] @hasMany(indexName: "byMailAccountLink", fields: ["id"])
+  
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+# ==========================================
+# Attachment Model
+# ==========================================
+
+type Attachment
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: owner, ownerField: "uploaderId", operations: [create, read, delete] },
+    { allow: private, operations: [read], provider: userPools }
+  ])
+{
+  id: ID!
+  
+  postId: ID @index(name: "byPost")
+  articleId: ID @index(name: "byArticle")
+  
+  s3Key: String! @index(name: "byS3Key", queryField: "attachmentsByS3Key")
+  s3Bucket: String!
+  
+  fileName: String!
+  fileSize: Int!
+  mimeType: String!
+  
+  isEmbedded: Boolean!
+  embedLocation: String
+  
+  uploaderId: ID! @index(name: "byUploader")
+  uploader: MemberProfile @belongsTo(fields: ["uploaderId"])
+  
+  post: Post @belongsTo(fields: ["postId"])
+  article: Article @belongsTo(fields: ["articleId"])
+  
+  createdAt: AWSDateTime!
+}
+
+# ==========================================
+# View Count Queue (for async processing)
+# ==========================================
+
+type ViewCountQueue
+  @model
+  @auth(rules: [
+    { allow: groups, groups: ["Admin"] },
+    { allow: private, operations: [create], provider: userPools }
+  ])
+{
+  id: ID!
+  targetType: String! @index(name: "byTargetType", sortKeyFields: ["createdAt"])
+  targetId: ID!
+  incrementBy: Int!
+  processedAt: AWSDateTime @index(name: "byProcessed")
+  
+  createdAt: AWSDateTime!
+}
+
+# ==========================================
+# Custom Mutations & Queries
+# ==========================================
+
+type Mutation {
+  incrementViewCount(targetType: String!, targetId: ID!): ViewCountQueue
+    @function(name: "customResolvers-${env}")
+    @auth(rules: [
+      { allow: private, provider: userPools },
+      { allow: public, provider: iam }
+    ])
+    
+  checkPermission(
+    userId: ID!
+    permissionKey: String!
+    resourceId: ID
+    resourceType: String
+  ): PermissionCheckResult
+    @function(name: "permissionChecker-${env}")
+    @auth(rules: [
+      { allow: private, provider: userPools },
+      { allow: groups, groups: ["Admin"] }
+    ])
+}
+
+type Query {
+  getDefaultLayout: Layout
+    @auth(rules: [
+      { allow: public, provider: iam },
+      { allow: private, provider: userPools },
+      { allow: groups, groups: ["Admin"] }
+    ])
+    
+  getUserPermissions(userId: ID!): [String]
+    @function(name: "permissionChecker-${env}")
+    @auth(rules: [
+      { allow: private, provider: userPools },
+      { allow: groups, groups: ["Admin"] }
+    ])
+}
+
+type PermissionCheckResult {
+  allowed: Boolean!
+  reason: String
+}
