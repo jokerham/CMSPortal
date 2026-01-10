@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2025-01-07T00-00-00",
+    "name": "20260110-115000 add default roles and permissions.ts",
+    "description": "Add default roles (Admin, Member) and permissions",
+    "appliedAt": "2026-01-10T06:46:22.810Z"
+  },
+  {
+    "timestamp": "2025-01-07T00-01-00",
+    "name": "20260110-115700 create default layout.ts",
+    "description": "Create default full-width layout",
+    "appliedAt": "2026-01-10T06:46:22.930Z"
+  }
+]
