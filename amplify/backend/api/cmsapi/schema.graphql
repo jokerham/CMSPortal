@@ -16,6 +16,7 @@ type MemberProfile
   @auth(rules: [
     { allow: groups, groups: ["Admin"] },
     { allow: owner, ownerField: "id", operations: [read, update] },
+    { allow: public, operations: [create], provider: iam },
     { allow: private, operations: [read], provider: userPools }
   ])
 {
@@ -45,6 +46,7 @@ type Role
   @model
   @auth(rules: [
     { allow: groups, groups: ["Admin"] },
+    { allow: public, operations: [read], provider: iam },
     { allow: private, operations: [read], provider: userPools }
   ])
 {

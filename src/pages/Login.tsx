@@ -99,6 +99,19 @@ export default function Login() {
             >
               {loading ? 'Signing in…' : 'Sign in'}
             </Button>
+
+            <Box sx={{ mt: 2, textAlign: 'center' }}>
+              <Typography variant="body2" color="text.secondary" component="span">
+                Don't have an account?{' '}
+              </Typography>
+              <Button
+                variant="text"
+                onClick={() => navigate('/signup')}
+                sx={{ textTransform: 'none', p: 0, minWidth: 'auto' }}
+              >
+                Sign up
+              </Button>
+            </Box>
           </Box>
         </Paper>
       </Box>

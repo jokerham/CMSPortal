@@ -14,6 +14,15 @@
     "categories": {
       "auth": {
         "cmsportal30960b77": {}
+      },
+      "function": {
+        "postConfirmationTrigger": {
+          "deploymentBucketName": "amplify-cmsportal-dev-11dff-deployment",
+          "s3Key": "amplify-builds/postConfirmationTrigger-56506475744952714b52-build.zip"
+        }
+      },
+      "api": {
+        "cmsapi": {}
       }
     }
   }

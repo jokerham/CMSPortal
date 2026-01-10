@@ -8,13 +8,6 @@ type GeneratedQuery<InputType, OutputType> = string & {
   __generatedQueryOutput: OutputType;
 };
 
-export const getUserPermissions = /* GraphQL */ `query GetUserPermissions($userId: ID!) {
-  getUserPermissions(userId: $userId)
-}
-` as GeneratedQuery<
-  APITypes.GetUserPermissionsQueryVariables,
-  APITypes.GetUserPermissionsQuery
->;
 export const getMemberProfile = /* GraphQL */ `query GetMemberProfile($id: ID!) {
   getMemberProfile(id: $id) {
     id
@@ -92,427 +85,6 @@ export const listMemberProfiles = /* GraphQL */ `query ListMemberProfiles(
   APITypes.ListMemberProfilesQueryVariables,
   APITypes.ListMemberProfilesQuery
 >;
-export const getRole = /* GraphQL */ `query GetRole($id: ID!) {
-  getRole(id: $id) {
-    id
-    name
-    description
-    isSystemRole
-    createdAt
-    updatedAt
-    permissions {
-      nextToken
-      __typename
-    }
-    members {
-      nextToken
-      __typename
-    }
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.GetRoleQueryVariables, APITypes.GetRoleQuery>;
-export const listRoles = /* GraphQL */ `query ListRoles(
-  $filter: ModelRoleFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listRoles(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      name
-      description
-      isSystemRole
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<APITypes.ListRolesQueryVariables, APITypes.ListRolesQuery>;
-export const getPermission = /* GraphQL */ `query GetPermission($id: ID!) {
-  getPermission(id: $id) {
-    id
-    moduleType
-    permissionKey
-    displayName
-    description
-    category
-    rolePermissions {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetPermissionQueryVariables,
-  APITypes.GetPermissionQuery
->;
-export const listPermissions = /* GraphQL */ `query ListPermissions(
-  $filter: ModelPermissionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listPermissions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      moduleType
-      permissionKey
-      displayName
-      description
-      category
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListPermissionsQueryVariables,
-  APITypes.ListPermissionsQuery
->;
-export const getRolePermission = /* GraphQL */ `query GetRolePermission($id: ID!) {
-  getRolePermission(id: $id) {
-    id
-    roleId
-    permissionId
-    role {
-      id
-      name
-      description
-      isSystemRole
-      createdAt
-      updatedAt
-      __typename
-    }
-    permission {
-      id
-      moduleType
-      permissionKey
-      displayName
-      description
-      category
-      createdAt
-      updatedAt
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetRolePermissionQueryVariables,
-  APITypes.GetRolePermissionQuery
->;
-export const listRolePermissions = /* GraphQL */ `query ListRolePermissions(
-  $filter: ModelRolePermissionFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listRolePermissions(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      roleId
-      permissionId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListRolePermissionsQueryVariables,
-  APITypes.ListRolePermissionsQuery
->;
-export const getPostTag = /* GraphQL */ `query GetPostTag($id: ID!) {
-  getPostTag(id: $id) {
-    id
-    postId
-    tagId
-    post {
-      id
-      boardId
-      categoryId
-      title
-      content
-      authorId
-      viewCount
-      customFieldValues
-      customSort1
-      customSort2
-      customSort3
-      customSort4
-      customSort5
-      publishedAt
-      isPublished
-      isPinned
-      pinnedStatus
-      createdAt
-      updatedAt
-      __typename
-    }
-    tag {
-      id
-      name
-      slug
-      createdAt
-      updatedAt
-      __typename
-    }
-    createdAt
-    updatedAt
-    authorId
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetPostTagQueryVariables,
-  APITypes.GetPostTagQuery
->;
-export const listPostTags = /* GraphQL */ `query ListPostTags(
-  $filter: ModelPostTagFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listPostTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      postId
-      tagId
-      createdAt
-      updatedAt
-      authorId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListPostTagsQueryVariables,
-  APITypes.ListPostTagsQuery
->;
-export const getMailAccountLink = /* GraphQL */ `query GetMailAccountLink($id: ID!) {
-  getMailAccountLink(id: $id) {
-    id
-    calendarId
-    accountType
-    accountEmail
-    encryptedAccessToken
-    encryptedRefreshToken
-    tokenExpiresAt
-    displayName
-    colorHex
-    isActive
-    lastSyncedAt
-    lastSyncStatus
-    lastSyncError
-    calendar {
-      id
-      name
-      description
-      slug
-      defaultView
-      createdAt
-      updatedAt
-      __typename
-    }
-    events {
-      nextToken
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetMailAccountLinkQueryVariables,
-  APITypes.GetMailAccountLinkQuery
->;
-export const listMailAccountLinks = /* GraphQL */ `query ListMailAccountLinks(
-  $filter: ModelMailAccountLinkFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listMailAccountLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      calendarId
-      accountType
-      accountEmail
-      encryptedAccessToken
-      encryptedRefreshToken
-      tokenExpiresAt
-      displayName
-      colorHex
-      isActive
-      lastSyncedAt
-      lastSyncStatus
-      lastSyncError
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListMailAccountLinksQueryVariables,
-  APITypes.ListMailAccountLinksQuery
->;
-export const getAttachment = /* GraphQL */ `query GetAttachment($id: ID!) {
-  getAttachment(id: $id) {
-    id
-    postId
-    articleId
-    s3Key
-    s3Bucket
-    fileName
-    fileSize
-    mimeType
-    isEmbedded
-    embedLocation
-    uploaderId
-    uploader {
-      id
-      email
-      displayName
-      avatarS3Key
-      roleId
-      createdAt
-      lastLoginAt
-      isActive
-      cachedPermissions
-      permissionsCachedAt
-      updatedAt
-      __typename
-    }
-    post {
-      id
-      boardId
-      categoryId
-      title
-      content
-      authorId
-      viewCount
-      customFieldValues
-      customSort1
-      customSort2
-      customSort3
-      customSort4
-      customSort5
-      publishedAt
-      isPublished
-      isPinned
-      pinnedStatus
-      createdAt
-      updatedAt
-      __typename
-    }
-    article {
-      id
-      title
-      content
-      slug
-      authorId
-      viewCount
-      publishedAt
-      isPublished
-      createdAt
-      updatedAt
-      __typename
-    }
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetAttachmentQueryVariables,
-  APITypes.GetAttachmentQuery
->;
-export const listAttachments = /* GraphQL */ `query ListAttachments(
-  $filter: ModelAttachmentFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listAttachments(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      postId
-      articleId
-      s3Key
-      s3Bucket
-      fileName
-      fileSize
-      mimeType
-      isEmbedded
-      embedLocation
-      uploaderId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListAttachmentsQueryVariables,
-  APITypes.ListAttachmentsQuery
->;
-export const getViewCountQueue = /* GraphQL */ `query GetViewCountQueue($id: ID!) {
-  getViewCountQueue(id: $id) {
-    id
-    targetType
-    targetId
-    incrementBy
-    processedAt
-    createdAt
-    updatedAt
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.GetViewCountQueueQueryVariables,
-  APITypes.GetViewCountQueueQuery
->;
-export const listViewCountQueues = /* GraphQL */ `query ListViewCountQueues(
-  $filter: ModelViewCountQueueFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listViewCountQueues(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
-      id
-      targetType
-      targetId
-      incrementBy
-      processedAt
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ListViewCountQueuesQueryVariables,
-  APITypes.ListViewCountQueuesQuery
->;
 export const memberProfilesByEmail = /* GraphQL */ `query MemberProfilesByEmail(
   $email: String!
   $sortDirection: ModelSortDirection
@@ -585,6 +157,46 @@ export const memberProfilesByRoleId = /* GraphQL */ `query MemberProfilesByRoleI
   APITypes.MemberProfilesByRoleIdQueryVariables,
   APITypes.MemberProfilesByRoleIdQuery
 >;
+export const getRole = /* GraphQL */ `query GetRole($id: ID!) {
+  getRole(id: $id) {
+    id
+    name
+    description
+    isSystemRole
+    createdAt
+    updatedAt
+    permissions {
+      nextToken
+      __typename
+    }
+    members {
+      nextToken
+      __typename
+    }
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.GetRoleQueryVariables, APITypes.GetRoleQuery>;
+export const listRoles = /* GraphQL */ `query ListRoles(
+  $filter: ModelRoleFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRoles(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      name
+      description
+      isSystemRole
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<APITypes.ListRolesQueryVariables, APITypes.ListRolesQuery>;
 export const rolesByName = /* GraphQL */ `query RolesByName(
   $name: String!
   $sortDirection: ModelSortDirection
@@ -615,6 +227,52 @@ export const rolesByName = /* GraphQL */ `query RolesByName(
 ` as GeneratedQuery<
   APITypes.RolesByNameQueryVariables,
   APITypes.RolesByNameQuery
+>;
+export const getPermission = /* GraphQL */ `query GetPermission($id: ID!) {
+  getPermission(id: $id) {
+    id
+    moduleType
+    permissionKey
+    displayName
+    description
+    category
+    rolePermissions {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetPermissionQueryVariables,
+  APITypes.GetPermissionQuery
+>;
+export const listPermissions = /* GraphQL */ `query ListPermissions(
+  $filter: ModelPermissionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPermissions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      moduleType
+      permissionKey
+      displayName
+      description
+      category
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListPermissionsQueryVariables,
+  APITypes.ListPermissionsQuery
 >;
 export const permissionsByModuleTypeAndPermissionKey = /* GraphQL */ `query PermissionsByModuleTypeAndPermissionKey(
   $moduleType: String!
@@ -650,6 +308,62 @@ export const permissionsByModuleTypeAndPermissionKey = /* GraphQL */ `query Perm
 ` as GeneratedQuery<
   APITypes.PermissionsByModuleTypeAndPermissionKeyQueryVariables,
   APITypes.PermissionsByModuleTypeAndPermissionKeyQuery
+>;
+export const getRolePermission = /* GraphQL */ `query GetRolePermission($id: ID!) {
+  getRolePermission(id: $id) {
+    id
+    roleId
+    permissionId
+    role {
+      id
+      name
+      description
+      isSystemRole
+      createdAt
+      updatedAt
+      __typename
+    }
+    permission {
+      id
+      moduleType
+      permissionKey
+      displayName
+      description
+      category
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetRolePermissionQueryVariables,
+  APITypes.GetRolePermissionQuery
+>;
+export const listRolePermissions = /* GraphQL */ `query ListRolePermissions(
+  $filter: ModelRolePermissionFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listRolePermissions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      roleId
+      permissionId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListRolePermissionsQueryVariables,
+  APITypes.ListRolePermissionsQuery
 >;
 export const rolePermissionsByRoleId = /* GraphQL */ `query RolePermissionsByRoleId(
   $roleId: ID!
@@ -710,366 +424,6 @@ export const rolePermissionsByPermissionId = /* GraphQL */ `query RolePermission
 ` as GeneratedQuery<
   APITypes.RolePermissionsByPermissionIdQueryVariables,
   APITypes.RolePermissionsByPermissionIdQuery
->;
-export const postTagsByPostId = /* GraphQL */ `query PostTagsByPostId(
-  $postId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelPostTagFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  postTagsByPostId(
-    postId: $postId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      postId
-      tagId
-      createdAt
-      updatedAt
-      authorId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.PostTagsByPostIdQueryVariables,
-  APITypes.PostTagsByPostIdQuery
->;
-export const postTagsByTagId = /* GraphQL */ `query PostTagsByTagId(
-  $tagId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelPostTagFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  postTagsByTagId(
-    tagId: $tagId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      postId
-      tagId
-      createdAt
-      updatedAt
-      authorId
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.PostTagsByTagIdQueryVariables,
-  APITypes.PostTagsByTagIdQuery
->;
-export const mailAccountLinksByCalendarId = /* GraphQL */ `query MailAccountLinksByCalendarId(
-  $calendarId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelMailAccountLinkFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  mailAccountLinksByCalendarId(
-    calendarId: $calendarId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      calendarId
-      accountType
-      accountEmail
-      encryptedAccessToken
-      encryptedRefreshToken
-      tokenExpiresAt
-      displayName
-      colorHex
-      isActive
-      lastSyncedAt
-      lastSyncStatus
-      lastSyncError
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.MailAccountLinksByCalendarIdQueryVariables,
-  APITypes.MailAccountLinksByCalendarIdQuery
->;
-export const mailAccountLinksByEmail = /* GraphQL */ `query MailAccountLinksByEmail(
-  $accountEmail: String!
-  $sortDirection: ModelSortDirection
-  $filter: ModelMailAccountLinkFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  mailAccountLinksByEmail(
-    accountEmail: $accountEmail
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      calendarId
-      accountType
-      accountEmail
-      encryptedAccessToken
-      encryptedRefreshToken
-      tokenExpiresAt
-      displayName
-      colorHex
-      isActive
-      lastSyncedAt
-      lastSyncStatus
-      lastSyncError
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.MailAccountLinksByEmailQueryVariables,
-  APITypes.MailAccountLinksByEmailQuery
->;
-export const attachmentsByPostId = /* GraphQL */ `query AttachmentsByPostId(
-  $postId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelAttachmentFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  attachmentsByPostId(
-    postId: $postId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      postId
-      articleId
-      s3Key
-      s3Bucket
-      fileName
-      fileSize
-      mimeType
-      isEmbedded
-      embedLocation
-      uploaderId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.AttachmentsByPostIdQueryVariables,
-  APITypes.AttachmentsByPostIdQuery
->;
-export const attachmentsByArticleId = /* GraphQL */ `query AttachmentsByArticleId(
-  $articleId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelAttachmentFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  attachmentsByArticleId(
-    articleId: $articleId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      postId
-      articleId
-      s3Key
-      s3Bucket
-      fileName
-      fileSize
-      mimeType
-      isEmbedded
-      embedLocation
-      uploaderId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.AttachmentsByArticleIdQueryVariables,
-  APITypes.AttachmentsByArticleIdQuery
->;
-export const attachmentsByS3Key = /* GraphQL */ `query AttachmentsByS3Key(
-  $s3Key: String!
-  $sortDirection: ModelSortDirection
-  $filter: ModelAttachmentFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  attachmentsByS3Key(
-    s3Key: $s3Key
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      postId
-      articleId
-      s3Key
-      s3Bucket
-      fileName
-      fileSize
-      mimeType
-      isEmbedded
-      embedLocation
-      uploaderId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.AttachmentsByS3KeyQueryVariables,
-  APITypes.AttachmentsByS3KeyQuery
->;
-export const attachmentsByUploaderId = /* GraphQL */ `query AttachmentsByUploaderId(
-  $uploaderId: ID!
-  $sortDirection: ModelSortDirection
-  $filter: ModelAttachmentFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  attachmentsByUploaderId(
-    uploaderId: $uploaderId
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      postId
-      articleId
-      s3Key
-      s3Bucket
-      fileName
-      fileSize
-      mimeType
-      isEmbedded
-      embedLocation
-      uploaderId
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.AttachmentsByUploaderIdQueryVariables,
-  APITypes.AttachmentsByUploaderIdQuery
->;
-export const viewCountQueuesByTargetTypeAndCreatedAt = /* GraphQL */ `query ViewCountQueuesByTargetTypeAndCreatedAt(
-  $targetType: String!
-  $createdAt: ModelStringKeyConditionInput
-  $sortDirection: ModelSortDirection
-  $filter: ModelViewCountQueueFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  viewCountQueuesByTargetTypeAndCreatedAt(
-    targetType: $targetType
-    createdAt: $createdAt
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      targetType
-      targetId
-      incrementBy
-      processedAt
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ViewCountQueuesByTargetTypeAndCreatedAtQueryVariables,
-  APITypes.ViewCountQueuesByTargetTypeAndCreatedAtQuery
->;
-export const viewCountQueuesByProcessedAt = /* GraphQL */ `query ViewCountQueuesByProcessedAt(
-  $processedAt: AWSDateTime!
-  $sortDirection: ModelSortDirection
-  $filter: ModelViewCountQueueFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  viewCountQueuesByProcessedAt(
-    processedAt: $processedAt
-    sortDirection: $sortDirection
-    filter: $filter
-    limit: $limit
-    nextToken: $nextToken
-  ) {
-    items {
-      id
-      targetType
-      targetId
-      incrementBy
-      processedAt
-      createdAt
-      updatedAt
-      __typename
-    }
-    nextToken
-    __typename
-  }
-}
-` as GeneratedQuery<
-  APITypes.ViewCountQueuesByProcessedAtQueryVariables,
-  APITypes.ViewCountQueuesByProcessedAtQuery
 >;
 export const getMenu = /* GraphQL */ `query GetMenu($id: ID!) {
   getMenu(id: $id) {
@@ -2385,6 +1739,136 @@ export const tagsBySlug = /* GraphQL */ `query TagsBySlug(
   APITypes.TagsBySlugQueryVariables,
   APITypes.TagsBySlugQuery
 >;
+export const getPostTag = /* GraphQL */ `query GetPostTag($id: ID!) {
+  getPostTag(id: $id) {
+    id
+    postId
+    tagId
+    post {
+      id
+      boardId
+      categoryId
+      title
+      content
+      authorId
+      viewCount
+      customFieldValues
+      customSort1
+      customSort2
+      customSort3
+      customSort4
+      customSort5
+      publishedAt
+      isPublished
+      isPinned
+      pinnedStatus
+      createdAt
+      updatedAt
+      __typename
+    }
+    tag {
+      id
+      name
+      slug
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    authorId
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetPostTagQueryVariables,
+  APITypes.GetPostTagQuery
+>;
+export const listPostTags = /* GraphQL */ `query ListPostTags(
+  $filter: ModelPostTagFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listPostTags(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      postId
+      tagId
+      createdAt
+      updatedAt
+      authorId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListPostTagsQueryVariables,
+  APITypes.ListPostTagsQuery
+>;
+export const postTagsByPostId = /* GraphQL */ `query PostTagsByPostId(
+  $postId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelPostTagFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  postTagsByPostId(
+    postId: $postId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postId
+      tagId
+      createdAt
+      updatedAt
+      authorId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PostTagsByPostIdQueryVariables,
+  APITypes.PostTagsByPostIdQuery
+>;
+export const postTagsByTagId = /* GraphQL */ `query PostTagsByTagId(
+  $tagId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelPostTagFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  postTagsByTagId(
+    tagId: $tagId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postId
+      tagId
+      createdAt
+      updatedAt
+      authorId
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.PostTagsByTagIdQueryVariables,
+  APITypes.PostTagsByTagIdQuery
+>;
 export const getComment = /* GraphQL */ `query GetComment($id: ID!) {
   getComment(id: $id) {
     id
@@ -2906,6 +2390,515 @@ export const eventsByCreatorIdAndStartDateTime = /* GraphQL */ `query EventsByCr
   APITypes.EventsByCreatorIdAndStartDateTimeQueryVariables,
   APITypes.EventsByCreatorIdAndStartDateTimeQuery
 >;
+export const getMailAccountLink = /* GraphQL */ `query GetMailAccountLink($id: ID!) {
+  getMailAccountLink(id: $id) {
+    id
+    calendarId
+    accountType
+    accountEmail
+    encryptedAccessToken
+    encryptedRefreshToken
+    tokenExpiresAt
+    displayName
+    colorHex
+    isActive
+    lastSyncedAt
+    lastSyncStatus
+    lastSyncError
+    calendar {
+      id
+      name
+      description
+      slug
+      defaultView
+      createdAt
+      updatedAt
+      __typename
+    }
+    events {
+      nextToken
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetMailAccountLinkQueryVariables,
+  APITypes.GetMailAccountLinkQuery
+>;
+export const listMailAccountLinks = /* GraphQL */ `query ListMailAccountLinks(
+  $filter: ModelMailAccountLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listMailAccountLinks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      calendarId
+      accountType
+      accountEmail
+      encryptedAccessToken
+      encryptedRefreshToken
+      tokenExpiresAt
+      displayName
+      colorHex
+      isActive
+      lastSyncedAt
+      lastSyncStatus
+      lastSyncError
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListMailAccountLinksQueryVariables,
+  APITypes.ListMailAccountLinksQuery
+>;
+export const mailAccountLinksByCalendarId = /* GraphQL */ `query MailAccountLinksByCalendarId(
+  $calendarId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelMailAccountLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  mailAccountLinksByCalendarId(
+    calendarId: $calendarId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      calendarId
+      accountType
+      accountEmail
+      encryptedAccessToken
+      encryptedRefreshToken
+      tokenExpiresAt
+      displayName
+      colorHex
+      isActive
+      lastSyncedAt
+      lastSyncStatus
+      lastSyncError
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.MailAccountLinksByCalendarIdQueryVariables,
+  APITypes.MailAccountLinksByCalendarIdQuery
+>;
+export const mailAccountLinksByEmail = /* GraphQL */ `query MailAccountLinksByEmail(
+  $accountEmail: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelMailAccountLinkFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  mailAccountLinksByEmail(
+    accountEmail: $accountEmail
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      calendarId
+      accountType
+      accountEmail
+      encryptedAccessToken
+      encryptedRefreshToken
+      tokenExpiresAt
+      displayName
+      colorHex
+      isActive
+      lastSyncedAt
+      lastSyncStatus
+      lastSyncError
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.MailAccountLinksByEmailQueryVariables,
+  APITypes.MailAccountLinksByEmailQuery
+>;
+export const getAttachment = /* GraphQL */ `query GetAttachment($id: ID!) {
+  getAttachment(id: $id) {
+    id
+    postId
+    articleId
+    s3Key
+    s3Bucket
+    fileName
+    fileSize
+    mimeType
+    isEmbedded
+    embedLocation
+    uploaderId
+    uploader {
+      id
+      email
+      displayName
+      avatarS3Key
+      roleId
+      createdAt
+      lastLoginAt
+      isActive
+      cachedPermissions
+      permissionsCachedAt
+      updatedAt
+      __typename
+    }
+    post {
+      id
+      boardId
+      categoryId
+      title
+      content
+      authorId
+      viewCount
+      customFieldValues
+      customSort1
+      customSort2
+      customSort3
+      customSort4
+      customSort5
+      publishedAt
+      isPublished
+      isPinned
+      pinnedStatus
+      createdAt
+      updatedAt
+      __typename
+    }
+    article {
+      id
+      title
+      content
+      slug
+      authorId
+      viewCount
+      publishedAt
+      isPublished
+      createdAt
+      updatedAt
+      __typename
+    }
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetAttachmentQueryVariables,
+  APITypes.GetAttachmentQuery
+>;
+export const listAttachments = /* GraphQL */ `query ListAttachments(
+  $filter: ModelAttachmentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAttachments(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      postId
+      articleId
+      s3Key
+      s3Bucket
+      fileName
+      fileSize
+      mimeType
+      isEmbedded
+      embedLocation
+      uploaderId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListAttachmentsQueryVariables,
+  APITypes.ListAttachmentsQuery
+>;
+export const attachmentsByPostId = /* GraphQL */ `query AttachmentsByPostId(
+  $postId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelAttachmentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  attachmentsByPostId(
+    postId: $postId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postId
+      articleId
+      s3Key
+      s3Bucket
+      fileName
+      fileSize
+      mimeType
+      isEmbedded
+      embedLocation
+      uploaderId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.AttachmentsByPostIdQueryVariables,
+  APITypes.AttachmentsByPostIdQuery
+>;
+export const attachmentsByArticleId = /* GraphQL */ `query AttachmentsByArticleId(
+  $articleId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelAttachmentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  attachmentsByArticleId(
+    articleId: $articleId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postId
+      articleId
+      s3Key
+      s3Bucket
+      fileName
+      fileSize
+      mimeType
+      isEmbedded
+      embedLocation
+      uploaderId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.AttachmentsByArticleIdQueryVariables,
+  APITypes.AttachmentsByArticleIdQuery
+>;
+export const attachmentsByS3Key = /* GraphQL */ `query AttachmentsByS3Key(
+  $s3Key: String!
+  $sortDirection: ModelSortDirection
+  $filter: ModelAttachmentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  attachmentsByS3Key(
+    s3Key: $s3Key
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postId
+      articleId
+      s3Key
+      s3Bucket
+      fileName
+      fileSize
+      mimeType
+      isEmbedded
+      embedLocation
+      uploaderId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.AttachmentsByS3KeyQueryVariables,
+  APITypes.AttachmentsByS3KeyQuery
+>;
+export const attachmentsByUploaderId = /* GraphQL */ `query AttachmentsByUploaderId(
+  $uploaderId: ID!
+  $sortDirection: ModelSortDirection
+  $filter: ModelAttachmentFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  attachmentsByUploaderId(
+    uploaderId: $uploaderId
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      postId
+      articleId
+      s3Key
+      s3Bucket
+      fileName
+      fileSize
+      mimeType
+      isEmbedded
+      embedLocation
+      uploaderId
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.AttachmentsByUploaderIdQueryVariables,
+  APITypes.AttachmentsByUploaderIdQuery
+>;
+export const getViewCountQueue = /* GraphQL */ `query GetViewCountQueue($id: ID!) {
+  getViewCountQueue(id: $id) {
+    id
+    targetType
+    targetId
+    incrementBy
+    processedAt
+    createdAt
+    updatedAt
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.GetViewCountQueueQueryVariables,
+  APITypes.GetViewCountQueueQuery
+>;
+export const listViewCountQueues = /* GraphQL */ `query ListViewCountQueues(
+  $filter: ModelViewCountQueueFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listViewCountQueues(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      targetType
+      targetId
+      incrementBy
+      processedAt
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ListViewCountQueuesQueryVariables,
+  APITypes.ListViewCountQueuesQuery
+>;
+export const viewCountQueuesByTargetTypeAndCreatedAt = /* GraphQL */ `query ViewCountQueuesByTargetTypeAndCreatedAt(
+  $targetType: String!
+  $createdAt: ModelStringKeyConditionInput
+  $sortDirection: ModelSortDirection
+  $filter: ModelViewCountQueueFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  viewCountQueuesByTargetTypeAndCreatedAt(
+    targetType: $targetType
+    createdAt: $createdAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      targetType
+      targetId
+      incrementBy
+      processedAt
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ViewCountQueuesByTargetTypeAndCreatedAtQueryVariables,
+  APITypes.ViewCountQueuesByTargetTypeAndCreatedAtQuery
+>;
+export const viewCountQueuesByProcessedAt = /* GraphQL */ `query ViewCountQueuesByProcessedAt(
+  $processedAt: AWSDateTime!
+  $sortDirection: ModelSortDirection
+  $filter: ModelViewCountQueueFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  viewCountQueuesByProcessedAt(
+    processedAt: $processedAt
+    sortDirection: $sortDirection
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+  ) {
+    items {
+      id
+      targetType
+      targetId
+      incrementBy
+      processedAt
+      createdAt
+      updatedAt
+      __typename
+    }
+    nextToken
+    __typename
+  }
+}
+` as GeneratedQuery<
+  APITypes.ViewCountQueuesByProcessedAtQueryVariables,
+  APITypes.ViewCountQueuesByProcessedAtQuery
+>;
 export const getDefaultLayout = /* GraphQL */ `query GetDefaultLayout {
   getDefaultLayout {
     id
@@ -2926,4 +2919,11 @@ export const getDefaultLayout = /* GraphQL */ `query GetDefaultLayout {
 ` as GeneratedQuery<
   APITypes.GetDefaultLayoutQueryVariables,
   APITypes.GetDefaultLayoutQuery
+>;
+export const getUserPermissions = /* GraphQL */ `query GetUserPermissions($userId: ID!) {
+  getUserPermissions(userId: $userId)
+}
+` as GeneratedQuery<
+  APITypes.GetUserPermissionsQueryVariables,
+  APITypes.GetUserPermissionsQuery
 >;

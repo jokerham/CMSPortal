@@ -2,12 +2,6 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type PermissionCheckResult = {
-  __typename: "PermissionCheckResult",
-  allowed: boolean,
-  reason?: string | null,
-};
-
 export type CreateMemberProfileInput = {
   id?: string | null,
   email: string,
@@ -1263,6 +1257,12 @@ export type DeleteViewCountQueueInput = {
   id: string,
 };
 
+export type PermissionCheckResult = {
+  __typename: "PermissionCheckResult",
+  allowed: boolean,
+  reason?: string | null,
+};
+
 export type ModelMemberProfileFilterInput = {
   id?: ModelIDInput | null,
   email?: ModelStringInput | null,
@@ -1279,6 +1279,12 @@ export type ModelMemberProfileFilterInput = {
   or?: Array< ModelMemberProfileFilterInput | null > | null,
   not?: ModelMemberProfileFilterInput | null,
 };
+
+export enum ModelSortDirection {
+  ASC = "ASC",
+  DESC = "DESC",
+}
+
 
 export type ModelRoleFilterInput = {
   id?: ModelIDInput | null,
@@ -1318,6 +1324,16 @@ export type ModelPermissionConnection = {
   nextToken?: string | null,
 };
 
+export type ModelStringKeyConditionInput = {
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+};
+
 export type ModelRolePermissionFilterInput = {
   id?: ModelIDInput | null,
   roleId?: ModelIDInput | null,
@@ -1327,93 +1343,6 @@ export type ModelRolePermissionFilterInput = {
   and?: Array< ModelRolePermissionFilterInput | null > | null,
   or?: Array< ModelRolePermissionFilterInput | null > | null,
   not?: ModelRolePermissionFilterInput | null,
-};
-
-export type ModelPostTagFilterInput = {
-  id?: ModelIDInput | null,
-  postId?: ModelIDInput | null,
-  tagId?: ModelIDInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelPostTagFilterInput | null > | null,
-  or?: Array< ModelPostTagFilterInput | null > | null,
-  not?: ModelPostTagFilterInput | null,
-  authorId?: ModelStringInput | null,
-};
-
-export type ModelMailAccountLinkFilterInput = {
-  id?: ModelIDInput | null,
-  calendarId?: ModelIDInput | null,
-  accountType?: ModelStringInput | null,
-  accountEmail?: ModelStringInput | null,
-  encryptedAccessToken?: ModelStringInput | null,
-  encryptedRefreshToken?: ModelStringInput | null,
-  tokenExpiresAt?: ModelStringInput | null,
-  displayName?: ModelStringInput | null,
-  colorHex?: ModelStringInput | null,
-  isActive?: ModelBooleanInput | null,
-  lastSyncedAt?: ModelStringInput | null,
-  lastSyncStatus?: ModelStringInput | null,
-  lastSyncError?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelMailAccountLinkFilterInput | null > | null,
-  or?: Array< ModelMailAccountLinkFilterInput | null > | null,
-  not?: ModelMailAccountLinkFilterInput | null,
-};
-
-export type ModelAttachmentFilterInput = {
-  id?: ModelIDInput | null,
-  postId?: ModelIDInput | null,
-  articleId?: ModelIDInput | null,
-  s3Key?: ModelStringInput | null,
-  s3Bucket?: ModelStringInput | null,
-  fileName?: ModelStringInput | null,
-  fileSize?: ModelIntInput | null,
-  mimeType?: ModelStringInput | null,
-  isEmbedded?: ModelBooleanInput | null,
-  embedLocation?: ModelStringInput | null,
-  uploaderId?: ModelIDInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelAttachmentFilterInput | null > | null,
-  or?: Array< ModelAttachmentFilterInput | null > | null,
-  not?: ModelAttachmentFilterInput | null,
-};
-
-export type ModelViewCountQueueFilterInput = {
-  id?: ModelIDInput | null,
-  targetType?: ModelStringInput | null,
-  targetId?: ModelIDInput | null,
-  incrementBy?: ModelIntInput | null,
-  processedAt?: ModelStringInput | null,
-  createdAt?: ModelStringInput | null,
-  updatedAt?: ModelStringInput | null,
-  and?: Array< ModelViewCountQueueFilterInput | null > | null,
-  or?: Array< ModelViewCountQueueFilterInput | null > | null,
-  not?: ModelViewCountQueueFilterInput | null,
-};
-
-export type ModelViewCountQueueConnection = {
-  __typename: "ModelViewCountQueueConnection",
-  items:  Array<ViewCountQueue | null >,
-  nextToken?: string | null,
-};
-
-export enum ModelSortDirection {
-  ASC = "ASC",
-  DESC = "DESC",
-}
-
-
-export type ModelStringKeyConditionInput = {
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
 };
 
 export type ModelMenuFilterInput = {
@@ -1589,6 +1518,18 @@ export type ModelTagConnection = {
   nextToken?: string | null,
 };
 
+export type ModelPostTagFilterInput = {
+  id?: ModelIDInput | null,
+  postId?: ModelIDInput | null,
+  tagId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelPostTagFilterInput | null > | null,
+  or?: Array< ModelPostTagFilterInput | null > | null,
+  not?: ModelPostTagFilterInput | null,
+  authorId?: ModelStringInput | null,
+};
+
 export type ModelCommentFilterInput = {
   id?: ModelIDInput | null,
   postId?: ModelIDInput | null,
@@ -1645,6 +1586,65 @@ export type ModelEventFilterInput = {
   and?: Array< ModelEventFilterInput | null > | null,
   or?: Array< ModelEventFilterInput | null > | null,
   not?: ModelEventFilterInput | null,
+};
+
+export type ModelMailAccountLinkFilterInput = {
+  id?: ModelIDInput | null,
+  calendarId?: ModelIDInput | null,
+  accountType?: ModelStringInput | null,
+  accountEmail?: ModelStringInput | null,
+  encryptedAccessToken?: ModelStringInput | null,
+  encryptedRefreshToken?: ModelStringInput | null,
+  tokenExpiresAt?: ModelStringInput | null,
+  displayName?: ModelStringInput | null,
+  colorHex?: ModelStringInput | null,
+  isActive?: ModelBooleanInput | null,
+  lastSyncedAt?: ModelStringInput | null,
+  lastSyncStatus?: ModelStringInput | null,
+  lastSyncError?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelMailAccountLinkFilterInput | null > | null,
+  or?: Array< ModelMailAccountLinkFilterInput | null > | null,
+  not?: ModelMailAccountLinkFilterInput | null,
+};
+
+export type ModelAttachmentFilterInput = {
+  id?: ModelIDInput | null,
+  postId?: ModelIDInput | null,
+  articleId?: ModelIDInput | null,
+  s3Key?: ModelStringInput | null,
+  s3Bucket?: ModelStringInput | null,
+  fileName?: ModelStringInput | null,
+  fileSize?: ModelIntInput | null,
+  mimeType?: ModelStringInput | null,
+  isEmbedded?: ModelBooleanInput | null,
+  embedLocation?: ModelStringInput | null,
+  uploaderId?: ModelIDInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelAttachmentFilterInput | null > | null,
+  or?: Array< ModelAttachmentFilterInput | null > | null,
+  not?: ModelAttachmentFilterInput | null,
+};
+
+export type ModelViewCountQueueFilterInput = {
+  id?: ModelIDInput | null,
+  targetType?: ModelStringInput | null,
+  targetId?: ModelIDInput | null,
+  incrementBy?: ModelIntInput | null,
+  processedAt?: ModelStringInput | null,
+  createdAt?: ModelStringInput | null,
+  updatedAt?: ModelStringInput | null,
+  and?: Array< ModelViewCountQueueFilterInput | null > | null,
+  or?: Array< ModelViewCountQueueFilterInput | null > | null,
+  not?: ModelViewCountQueueFilterInput | null,
+};
+
+export type ModelViewCountQueueConnection = {
+  __typename: "ModelViewCountQueueConnection",
+  items:  Array<ViewCountQueue | null >,
+  nextToken?: string | null,
 };
 
 export type ModelSubscriptionMemberProfileFilterInput = {
@@ -1732,79 +1732,6 @@ export type ModelSubscriptionRolePermissionFilterInput = {
   or?: Array< ModelSubscriptionRolePermissionFilterInput | null > | null,
 };
 
-export type ModelSubscriptionPostTagFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  postId?: ModelSubscriptionIDInput | null,
-  tagId?: ModelSubscriptionIDInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionPostTagFilterInput | null > | null,
-  or?: Array< ModelSubscriptionPostTagFilterInput | null > | null,
-  authorId?: ModelStringInput | null,
-};
-
-export type ModelSubscriptionMailAccountLinkFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  calendarId?: ModelSubscriptionIDInput | null,
-  accountType?: ModelSubscriptionStringInput | null,
-  accountEmail?: ModelSubscriptionStringInput | null,
-  encryptedAccessToken?: ModelSubscriptionStringInput | null,
-  encryptedRefreshToken?: ModelSubscriptionStringInput | null,
-  tokenExpiresAt?: ModelSubscriptionStringInput | null,
-  displayName?: ModelSubscriptionStringInput | null,
-  colorHex?: ModelSubscriptionStringInput | null,
-  isActive?: ModelSubscriptionBooleanInput | null,
-  lastSyncedAt?: ModelSubscriptionStringInput | null,
-  lastSyncStatus?: ModelSubscriptionStringInput | null,
-  lastSyncError?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionMailAccountLinkFilterInput | null > | null,
-  or?: Array< ModelSubscriptionMailAccountLinkFilterInput | null > | null,
-};
-
-export type ModelSubscriptionAttachmentFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  postId?: ModelSubscriptionIDInput | null,
-  articleId?: ModelSubscriptionIDInput | null,
-  s3Key?: ModelSubscriptionStringInput | null,
-  s3Bucket?: ModelSubscriptionStringInput | null,
-  fileName?: ModelSubscriptionStringInput | null,
-  fileSize?: ModelSubscriptionIntInput | null,
-  mimeType?: ModelSubscriptionStringInput | null,
-  isEmbedded?: ModelSubscriptionBooleanInput | null,
-  embedLocation?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionAttachmentFilterInput | null > | null,
-  or?: Array< ModelSubscriptionAttachmentFilterInput | null > | null,
-  uploaderId?: ModelStringInput | null,
-};
-
-export type ModelSubscriptionIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  in?: Array< number | null > | null,
-  notIn?: Array< number | null > | null,
-};
-
-export type ModelSubscriptionViewCountQueueFilterInput = {
-  id?: ModelSubscriptionIDInput | null,
-  targetType?: ModelSubscriptionStringInput | null,
-  targetId?: ModelSubscriptionIDInput | null,
-  incrementBy?: ModelSubscriptionIntInput | null,
-  processedAt?: ModelSubscriptionStringInput | null,
-  createdAt?: ModelSubscriptionStringInput | null,
-  updatedAt?: ModelSubscriptionStringInput | null,
-  and?: Array< ModelSubscriptionViewCountQueueFilterInput | null > | null,
-  or?: Array< ModelSubscriptionViewCountQueueFilterInput | null > | null,
-};
-
 export type ModelSubscriptionMenuFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   parentMenuId?: ModelSubscriptionIDInput | null,
@@ -1818,6 +1745,18 @@ export type ModelSubscriptionMenuFilterInput = {
   updatedAt?: ModelSubscriptionStringInput | null,
   and?: Array< ModelSubscriptionMenuFilterInput | null > | null,
   or?: Array< ModelSubscriptionMenuFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type ModelSubscriptionModuleConfigFilterInput = {
@@ -1922,6 +1861,17 @@ export type ModelSubscriptionTagFilterInput = {
   or?: Array< ModelSubscriptionTagFilterInput | null > | null,
 };
 
+export type ModelSubscriptionPostTagFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  postId?: ModelSubscriptionIDInput | null,
+  tagId?: ModelSubscriptionIDInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionPostTagFilterInput | null > | null,
+  or?: Array< ModelSubscriptionPostTagFilterInput | null > | null,
+  authorId?: ModelStringInput | null,
+};
+
 export type ModelSubscriptionCommentFilterInput = {
   id?: ModelSubscriptionIDInput | null,
   postId?: ModelSubscriptionIDInput | null,
@@ -1971,19 +1921,54 @@ export type ModelSubscriptionEventFilterInput = {
   creatorId?: ModelStringInput | null,
 };
 
-export type CheckPermissionMutationVariables = {
-  userId: string,
-  permissionKey: string,
-  resourceId?: string | null,
-  resourceType?: string | null,
+export type ModelSubscriptionMailAccountLinkFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  calendarId?: ModelSubscriptionIDInput | null,
+  accountType?: ModelSubscriptionStringInput | null,
+  accountEmail?: ModelSubscriptionStringInput | null,
+  encryptedAccessToken?: ModelSubscriptionStringInput | null,
+  encryptedRefreshToken?: ModelSubscriptionStringInput | null,
+  tokenExpiresAt?: ModelSubscriptionStringInput | null,
+  displayName?: ModelSubscriptionStringInput | null,
+  colorHex?: ModelSubscriptionStringInput | null,
+  isActive?: ModelSubscriptionBooleanInput | null,
+  lastSyncedAt?: ModelSubscriptionStringInput | null,
+  lastSyncStatus?: ModelSubscriptionStringInput | null,
+  lastSyncError?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionMailAccountLinkFilterInput | null > | null,
+  or?: Array< ModelSubscriptionMailAccountLinkFilterInput | null > | null,
 };
 
-export type CheckPermissionMutation = {
-  checkPermission?:  {
-    __typename: "PermissionCheckResult",
-    allowed: boolean,
-    reason?: string | null,
-  } | null,
+export type ModelSubscriptionAttachmentFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  postId?: ModelSubscriptionIDInput | null,
+  articleId?: ModelSubscriptionIDInput | null,
+  s3Key?: ModelSubscriptionStringInput | null,
+  s3Bucket?: ModelSubscriptionStringInput | null,
+  fileName?: ModelSubscriptionStringInput | null,
+  fileSize?: ModelSubscriptionIntInput | null,
+  mimeType?: ModelSubscriptionStringInput | null,
+  isEmbedded?: ModelSubscriptionBooleanInput | null,
+  embedLocation?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionAttachmentFilterInput | null > | null,
+  or?: Array< ModelSubscriptionAttachmentFilterInput | null > | null,
+  uploaderId?: ModelStringInput | null,
+};
+
+export type ModelSubscriptionViewCountQueueFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  targetType?: ModelSubscriptionStringInput | null,
+  targetId?: ModelSubscriptionIDInput | null,
+  incrementBy?: ModelSubscriptionIntInput | null,
+  processedAt?: ModelSubscriptionStringInput | null,
+  createdAt?: ModelSubscriptionStringInput | null,
+  updatedAt?: ModelSubscriptionStringInput | null,
+  and?: Array< ModelSubscriptionViewCountQueueFilterInput | null > | null,
+  or?: Array< ModelSubscriptionViewCountQueueFilterInput | null > | null,
 };
 
 export type CreateMemberProfileMutationVariables = {
@@ -4380,12 +4365,19 @@ export type IncrementViewCountMutation = {
   } | null,
 };
 
-export type GetUserPermissionsQueryVariables = {
+export type CheckPermissionMutationVariables = {
   userId: string,
+  permissionKey: string,
+  resourceId?: string | null,
+  resourceType?: string | null,
 };
 
-export type GetUserPermissionsQuery = {
-  getUserPermissions?: Array< string | null > | null,
+export type CheckPermissionMutation = {
+  checkPermission?:  {
+    __typename: "PermissionCheckResult",
+    allowed: boolean,
+    reason?: string | null,
+  } | null,
 };
 
 export type GetMemberProfileQueryVariables = {
@@ -4465,6 +4457,64 @@ export type ListMemberProfilesQuery = {
   } | null,
 };
 
+export type MemberProfilesByEmailQueryVariables = {
+  email: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelMemberProfileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type MemberProfilesByEmailQuery = {
+  memberProfilesByEmail?:  {
+    __typename: "ModelMemberProfileConnection",
+    items:  Array< {
+      __typename: "MemberProfile",
+      id: string,
+      email: string,
+      displayName: string,
+      avatarS3Key?: string | null,
+      roleId: string,
+      createdAt: string,
+      lastLoginAt?: string | null,
+      isActive: boolean,
+      cachedPermissions?: Array< string | null > | null,
+      permissionsCachedAt?: string | null,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type MemberProfilesByRoleIdQueryVariables = {
+  roleId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelMemberProfileFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type MemberProfilesByRoleIdQuery = {
+  memberProfilesByRoleId?:  {
+    __typename: "ModelMemberProfileConnection",
+    items:  Array< {
+      __typename: "MemberProfile",
+      id: string,
+      email: string,
+      displayName: string,
+      avatarS3Key?: string | null,
+      roleId: string,
+      createdAt: string,
+      lastLoginAt?: string | null,
+      isActive: boolean,
+      cachedPermissions?: Array< string | null > | null,
+      permissionsCachedAt?: string | null,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetRoleQueryVariables = {
   id: string,
 };
@@ -4511,6 +4561,30 @@ export type ListRolesQuery = {
   } | null,
 };
 
+export type RolesByNameQueryVariables = {
+  name: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelRoleFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type RolesByNameQuery = {
+  rolesByName?:  {
+    __typename: "ModelRoleConnection",
+    items:  Array< {
+      __typename: "Role",
+      id: string,
+      name: string,
+      description?: string | null,
+      isSystemRole: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetPermissionQueryVariables = {
   id: string,
 };
@@ -4541,6 +4615,33 @@ export type ListPermissionsQueryVariables = {
 
 export type ListPermissionsQuery = {
   listPermissions?:  {
+    __typename: "ModelPermissionConnection",
+    items:  Array< {
+      __typename: "Permission",
+      id: string,
+      moduleType: string,
+      permissionKey: string,
+      displayName: string,
+      description?: string | null,
+      category: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PermissionsByModuleTypeAndPermissionKeyQueryVariables = {
+  moduleType: string,
+  permissionKey?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPermissionFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PermissionsByModuleTypeAndPermissionKeyQuery = {
+  permissionsByModuleTypeAndPermissionKey?:  {
     __typename: "ModelPermissionConnection",
     items:  Array< {
       __typename: "Permission",
@@ -4613,394 +4714,6 @@ export type ListRolePermissionsQuery = {
   } | null,
 };
 
-export type GetPostTagQueryVariables = {
-  id: string,
-};
-
-export type GetPostTagQuery = {
-  getPostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postId: string,
-    tagId: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    tag?:  {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      slug: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    authorId?: string | null,
-  } | null,
-};
-
-export type ListPostTagsQueryVariables = {
-  filter?: ModelPostTagFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListPostTagsQuery = {
-  listPostTags?:  {
-    __typename: "ModelPostTagConnection",
-    items:  Array< {
-      __typename: "PostTag",
-      id: string,
-      postId: string,
-      tagId: string,
-      createdAt: string,
-      updatedAt: string,
-      authorId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetMailAccountLinkQueryVariables = {
-  id: string,
-};
-
-export type GetMailAccountLinkQuery = {
-  getMailAccountLink?:  {
-    __typename: "MailAccountLink",
-    id: string,
-    calendarId: string,
-    accountType: string,
-    accountEmail: string,
-    encryptedAccessToken: string,
-    encryptedRefreshToken: string,
-    tokenExpiresAt: string,
-    displayName: string,
-    colorHex: string,
-    isActive: boolean,
-    lastSyncedAt?: string | null,
-    lastSyncStatus?: string | null,
-    lastSyncError?: string | null,
-    calendar?:  {
-      __typename: "Calendar",
-      id: string,
-      name: string,
-      description?: string | null,
-      slug: string,
-      defaultView: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    events?:  {
-      __typename: "ModelEventConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListMailAccountLinksQueryVariables = {
-  filter?: ModelMailAccountLinkFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListMailAccountLinksQuery = {
-  listMailAccountLinks?:  {
-    __typename: "ModelMailAccountLinkConnection",
-    items:  Array< {
-      __typename: "MailAccountLink",
-      id: string,
-      calendarId: string,
-      accountType: string,
-      accountEmail: string,
-      encryptedAccessToken: string,
-      encryptedRefreshToken: string,
-      tokenExpiresAt: string,
-      displayName: string,
-      colorHex: string,
-      isActive: boolean,
-      lastSyncedAt?: string | null,
-      lastSyncStatus?: string | null,
-      lastSyncError?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetAttachmentQueryVariables = {
-  id: string,
-};
-
-export type GetAttachmentQuery = {
-  getAttachment?:  {
-    __typename: "Attachment",
-    id: string,
-    postId?: string | null,
-    articleId?: string | null,
-    s3Key: string,
-    s3Bucket: string,
-    fileName: string,
-    fileSize: number,
-    mimeType: string,
-    isEmbedded: boolean,
-    embedLocation?: string | null,
-    uploaderId: string,
-    uploader?:  {
-      __typename: "MemberProfile",
-      id: string,
-      email: string,
-      displayName: string,
-      avatarS3Key?: string | null,
-      roleId: string,
-      createdAt: string,
-      lastLoginAt?: string | null,
-      isActive: boolean,
-      cachedPermissions?: Array< string | null > | null,
-      permissionsCachedAt?: string | null,
-      updatedAt: string,
-    } | null,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    article?:  {
-      __typename: "Article",
-      id: string,
-      title: string,
-      content: string,
-      slug: string,
-      authorId: string,
-      viewCount: number,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListAttachmentsQueryVariables = {
-  filter?: ModelAttachmentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListAttachmentsQuery = {
-  listAttachments?:  {
-    __typename: "ModelAttachmentConnection",
-    items:  Array< {
-      __typename: "Attachment",
-      id: string,
-      postId?: string | null,
-      articleId?: string | null,
-      s3Key: string,
-      s3Bucket: string,
-      fileName: string,
-      fileSize: number,
-      mimeType: string,
-      isEmbedded: boolean,
-      embedLocation?: string | null,
-      uploaderId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type GetViewCountQueueQueryVariables = {
-  id: string,
-};
-
-export type GetViewCountQueueQuery = {
-  getViewCountQueue?:  {
-    __typename: "ViewCountQueue",
-    id: string,
-    targetType: string,
-    targetId: string,
-    incrementBy: number,
-    processedAt?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type ListViewCountQueuesQueryVariables = {
-  filter?: ModelViewCountQueueFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ListViewCountQueuesQuery = {
-  listViewCountQueues?:  {
-    __typename: "ModelViewCountQueueConnection",
-    items:  Array< {
-      __typename: "ViewCountQueue",
-      id: string,
-      targetType: string,
-      targetId: string,
-      incrementBy: number,
-      processedAt?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type MemberProfilesByEmailQueryVariables = {
-  email: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelMemberProfileFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type MemberProfilesByEmailQuery = {
-  memberProfilesByEmail?:  {
-    __typename: "ModelMemberProfileConnection",
-    items:  Array< {
-      __typename: "MemberProfile",
-      id: string,
-      email: string,
-      displayName: string,
-      avatarS3Key?: string | null,
-      roleId: string,
-      createdAt: string,
-      lastLoginAt?: string | null,
-      isActive: boolean,
-      cachedPermissions?: Array< string | null > | null,
-      permissionsCachedAt?: string | null,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type MemberProfilesByRoleIdQueryVariables = {
-  roleId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelMemberProfileFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type MemberProfilesByRoleIdQuery = {
-  memberProfilesByRoleId?:  {
-    __typename: "ModelMemberProfileConnection",
-    items:  Array< {
-      __typename: "MemberProfile",
-      id: string,
-      email: string,
-      displayName: string,
-      avatarS3Key?: string | null,
-      roleId: string,
-      createdAt: string,
-      lastLoginAt?: string | null,
-      isActive: boolean,
-      cachedPermissions?: Array< string | null > | null,
-      permissionsCachedAt?: string | null,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type RolesByNameQueryVariables = {
-  name: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelRoleFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type RolesByNameQuery = {
-  rolesByName?:  {
-    __typename: "ModelRoleConnection",
-    items:  Array< {
-      __typename: "Role",
-      id: string,
-      name: string,
-      description?: string | null,
-      isSystemRole: boolean,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type PermissionsByModuleTypeAndPermissionKeyQueryVariables = {
-  moduleType: string,
-  permissionKey?: ModelStringKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPermissionFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type PermissionsByModuleTypeAndPermissionKeyQuery = {
-  permissionsByModuleTypeAndPermissionKey?:  {
-    __typename: "ModelPermissionConnection",
-    items:  Array< {
-      __typename: "Permission",
-      id: string,
-      moduleType: string,
-      permissionKey: string,
-      displayName: string,
-      description?: string | null,
-      category: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
 export type RolePermissionsByRoleIdQueryVariables = {
   roleId: string,
   sortDirection?: ModelSortDirection | null,
@@ -5040,295 +4753,6 @@ export type RolePermissionsByPermissionIdQuery = {
       id: string,
       roleId: string,
       permissionId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type PostTagsByPostIdQueryVariables = {
-  postId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPostTagFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type PostTagsByPostIdQuery = {
-  postTagsByPostId?:  {
-    __typename: "ModelPostTagConnection",
-    items:  Array< {
-      __typename: "PostTag",
-      id: string,
-      postId: string,
-      tagId: string,
-      createdAt: string,
-      updatedAt: string,
-      authorId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type PostTagsByTagIdQueryVariables = {
-  tagId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelPostTagFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type PostTagsByTagIdQuery = {
-  postTagsByTagId?:  {
-    __typename: "ModelPostTagConnection",
-    items:  Array< {
-      __typename: "PostTag",
-      id: string,
-      postId: string,
-      tagId: string,
-      createdAt: string,
-      updatedAt: string,
-      authorId?: string | null,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type MailAccountLinksByCalendarIdQueryVariables = {
-  calendarId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelMailAccountLinkFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type MailAccountLinksByCalendarIdQuery = {
-  mailAccountLinksByCalendarId?:  {
-    __typename: "ModelMailAccountLinkConnection",
-    items:  Array< {
-      __typename: "MailAccountLink",
-      id: string,
-      calendarId: string,
-      accountType: string,
-      accountEmail: string,
-      encryptedAccessToken: string,
-      encryptedRefreshToken: string,
-      tokenExpiresAt: string,
-      displayName: string,
-      colorHex: string,
-      isActive: boolean,
-      lastSyncedAt?: string | null,
-      lastSyncStatus?: string | null,
-      lastSyncError?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type MailAccountLinksByEmailQueryVariables = {
-  accountEmail: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelMailAccountLinkFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type MailAccountLinksByEmailQuery = {
-  mailAccountLinksByEmail?:  {
-    __typename: "ModelMailAccountLinkConnection",
-    items:  Array< {
-      __typename: "MailAccountLink",
-      id: string,
-      calendarId: string,
-      accountType: string,
-      accountEmail: string,
-      encryptedAccessToken: string,
-      encryptedRefreshToken: string,
-      tokenExpiresAt: string,
-      displayName: string,
-      colorHex: string,
-      isActive: boolean,
-      lastSyncedAt?: string | null,
-      lastSyncStatus?: string | null,
-      lastSyncError?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type AttachmentsByPostIdQueryVariables = {
-  postId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelAttachmentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type AttachmentsByPostIdQuery = {
-  attachmentsByPostId?:  {
-    __typename: "ModelAttachmentConnection",
-    items:  Array< {
-      __typename: "Attachment",
-      id: string,
-      postId?: string | null,
-      articleId?: string | null,
-      s3Key: string,
-      s3Bucket: string,
-      fileName: string,
-      fileSize: number,
-      mimeType: string,
-      isEmbedded: boolean,
-      embedLocation?: string | null,
-      uploaderId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type AttachmentsByArticleIdQueryVariables = {
-  articleId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelAttachmentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type AttachmentsByArticleIdQuery = {
-  attachmentsByArticleId?:  {
-    __typename: "ModelAttachmentConnection",
-    items:  Array< {
-      __typename: "Attachment",
-      id: string,
-      postId?: string | null,
-      articleId?: string | null,
-      s3Key: string,
-      s3Bucket: string,
-      fileName: string,
-      fileSize: number,
-      mimeType: string,
-      isEmbedded: boolean,
-      embedLocation?: string | null,
-      uploaderId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type AttachmentsByS3KeyQueryVariables = {
-  s3Key: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelAttachmentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type AttachmentsByS3KeyQuery = {
-  attachmentsByS3Key?:  {
-    __typename: "ModelAttachmentConnection",
-    items:  Array< {
-      __typename: "Attachment",
-      id: string,
-      postId?: string | null,
-      articleId?: string | null,
-      s3Key: string,
-      s3Bucket: string,
-      fileName: string,
-      fileSize: number,
-      mimeType: string,
-      isEmbedded: boolean,
-      embedLocation?: string | null,
-      uploaderId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type AttachmentsByUploaderIdQueryVariables = {
-  uploaderId: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelAttachmentFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type AttachmentsByUploaderIdQuery = {
-  attachmentsByUploaderId?:  {
-    __typename: "ModelAttachmentConnection",
-    items:  Array< {
-      __typename: "Attachment",
-      id: string,
-      postId?: string | null,
-      articleId?: string | null,
-      s3Key: string,
-      s3Bucket: string,
-      fileName: string,
-      fileSize: number,
-      mimeType: string,
-      isEmbedded: boolean,
-      embedLocation?: string | null,
-      uploaderId: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ViewCountQueuesByTargetTypeAndCreatedAtQueryVariables = {
-  targetType: string,
-  createdAt?: ModelStringKeyConditionInput | null,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelViewCountQueueFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ViewCountQueuesByTargetTypeAndCreatedAtQuery = {
-  viewCountQueuesByTargetTypeAndCreatedAt?:  {
-    __typename: "ModelViewCountQueueConnection",
-    items:  Array< {
-      __typename: "ViewCountQueue",
-      id: string,
-      targetType: string,
-      targetId: string,
-      incrementBy: number,
-      processedAt?: string | null,
-      createdAt: string,
-      updatedAt: string,
-    } | null >,
-    nextToken?: string | null,
-  } | null,
-};
-
-export type ViewCountQueuesByProcessedAtQueryVariables = {
-  processedAt: string,
-  sortDirection?: ModelSortDirection | null,
-  filter?: ModelViewCountQueueFilterInput | null,
-  limit?: number | null,
-  nextToken?: string | null,
-};
-
-export type ViewCountQueuesByProcessedAtQuery = {
-  viewCountQueuesByProcessedAt?:  {
-    __typename: "ModelViewCountQueueConnection",
-    items:  Array< {
-      __typename: "ViewCountQueue",
-      id: string,
-      targetType: string,
-      targetId: string,
-      incrementBy: number,
-      processedAt?: string | null,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -6518,6 +5942,122 @@ export type TagsBySlugQuery = {
   } | null,
 };
 
+export type GetPostTagQueryVariables = {
+  id: string,
+};
+
+export type GetPostTagQuery = {
+  getPostTag?:  {
+    __typename: "PostTag",
+    id: string,
+    postId: string,
+    tagId: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    tag?:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      slug: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    authorId?: string | null,
+  } | null,
+};
+
+export type ListPostTagsQueryVariables = {
+  filter?: ModelPostTagFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPostTagsQuery = {
+  listPostTags?:  {
+    __typename: "ModelPostTagConnection",
+    items:  Array< {
+      __typename: "PostTag",
+      id: string,
+      postId: string,
+      tagId: string,
+      createdAt: string,
+      updatedAt: string,
+      authorId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PostTagsByPostIdQueryVariables = {
+  postId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostTagFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PostTagsByPostIdQuery = {
+  postTagsByPostId?:  {
+    __typename: "ModelPostTagConnection",
+    items:  Array< {
+      __typename: "PostTag",
+      id: string,
+      postId: string,
+      tagId: string,
+      createdAt: string,
+      updatedAt: string,
+      authorId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type PostTagsByTagIdQueryVariables = {
+  tagId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelPostTagFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type PostTagsByTagIdQuery = {
+  postTagsByTagId?:  {
+    __typename: "ModelPostTagConnection",
+    items:  Array< {
+      __typename: "PostTag",
+      id: string,
+      postId: string,
+      tagId: string,
+      createdAt: string,
+      updatedAt: string,
+      authorId?: string | null,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetCommentQueryVariables = {
   id: string,
 };
@@ -6987,6 +6527,458 @@ export type EventsByCreatorIdAndStartDateTimeQuery = {
   } | null,
 };
 
+export type GetMailAccountLinkQueryVariables = {
+  id: string,
+};
+
+export type GetMailAccountLinkQuery = {
+  getMailAccountLink?:  {
+    __typename: "MailAccountLink",
+    id: string,
+    calendarId: string,
+    accountType: string,
+    accountEmail: string,
+    encryptedAccessToken: string,
+    encryptedRefreshToken: string,
+    tokenExpiresAt: string,
+    displayName: string,
+    colorHex: string,
+    isActive: boolean,
+    lastSyncedAt?: string | null,
+    lastSyncStatus?: string | null,
+    lastSyncError?: string | null,
+    calendar?:  {
+      __typename: "Calendar",
+      id: string,
+      name: string,
+      description?: string | null,
+      slug: string,
+      defaultView: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    events?:  {
+      __typename: "ModelEventConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListMailAccountLinksQueryVariables = {
+  filter?: ModelMailAccountLinkFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListMailAccountLinksQuery = {
+  listMailAccountLinks?:  {
+    __typename: "ModelMailAccountLinkConnection",
+    items:  Array< {
+      __typename: "MailAccountLink",
+      id: string,
+      calendarId: string,
+      accountType: string,
+      accountEmail: string,
+      encryptedAccessToken: string,
+      encryptedRefreshToken: string,
+      tokenExpiresAt: string,
+      displayName: string,
+      colorHex: string,
+      isActive: boolean,
+      lastSyncedAt?: string | null,
+      lastSyncStatus?: string | null,
+      lastSyncError?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type MailAccountLinksByCalendarIdQueryVariables = {
+  calendarId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelMailAccountLinkFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type MailAccountLinksByCalendarIdQuery = {
+  mailAccountLinksByCalendarId?:  {
+    __typename: "ModelMailAccountLinkConnection",
+    items:  Array< {
+      __typename: "MailAccountLink",
+      id: string,
+      calendarId: string,
+      accountType: string,
+      accountEmail: string,
+      encryptedAccessToken: string,
+      encryptedRefreshToken: string,
+      tokenExpiresAt: string,
+      displayName: string,
+      colorHex: string,
+      isActive: boolean,
+      lastSyncedAt?: string | null,
+      lastSyncStatus?: string | null,
+      lastSyncError?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type MailAccountLinksByEmailQueryVariables = {
+  accountEmail: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelMailAccountLinkFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type MailAccountLinksByEmailQuery = {
+  mailAccountLinksByEmail?:  {
+    __typename: "ModelMailAccountLinkConnection",
+    items:  Array< {
+      __typename: "MailAccountLink",
+      id: string,
+      calendarId: string,
+      accountType: string,
+      accountEmail: string,
+      encryptedAccessToken: string,
+      encryptedRefreshToken: string,
+      tokenExpiresAt: string,
+      displayName: string,
+      colorHex: string,
+      isActive: boolean,
+      lastSyncedAt?: string | null,
+      lastSyncStatus?: string | null,
+      lastSyncError?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetAttachmentQueryVariables = {
+  id: string,
+};
+
+export type GetAttachmentQuery = {
+  getAttachment?:  {
+    __typename: "Attachment",
+    id: string,
+    postId?: string | null,
+    articleId?: string | null,
+    s3Key: string,
+    s3Bucket: string,
+    fileName: string,
+    fileSize: number,
+    mimeType: string,
+    isEmbedded: boolean,
+    embedLocation?: string | null,
+    uploaderId: string,
+    uploader?:  {
+      __typename: "MemberProfile",
+      id: string,
+      email: string,
+      displayName: string,
+      avatarS3Key?: string | null,
+      roleId: string,
+      createdAt: string,
+      lastLoginAt?: string | null,
+      isActive: boolean,
+      cachedPermissions?: Array< string | null > | null,
+      permissionsCachedAt?: string | null,
+      updatedAt: string,
+    } | null,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      slug: string,
+      authorId: string,
+      viewCount: number,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListAttachmentsQueryVariables = {
+  filter?: ModelAttachmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListAttachmentsQuery = {
+  listAttachments?:  {
+    __typename: "ModelAttachmentConnection",
+    items:  Array< {
+      __typename: "Attachment",
+      id: string,
+      postId?: string | null,
+      articleId?: string | null,
+      s3Key: string,
+      s3Bucket: string,
+      fileName: string,
+      fileSize: number,
+      mimeType: string,
+      isEmbedded: boolean,
+      embedLocation?: string | null,
+      uploaderId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type AttachmentsByPostIdQueryVariables = {
+  postId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelAttachmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type AttachmentsByPostIdQuery = {
+  attachmentsByPostId?:  {
+    __typename: "ModelAttachmentConnection",
+    items:  Array< {
+      __typename: "Attachment",
+      id: string,
+      postId?: string | null,
+      articleId?: string | null,
+      s3Key: string,
+      s3Bucket: string,
+      fileName: string,
+      fileSize: number,
+      mimeType: string,
+      isEmbedded: boolean,
+      embedLocation?: string | null,
+      uploaderId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type AttachmentsByArticleIdQueryVariables = {
+  articleId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelAttachmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type AttachmentsByArticleIdQuery = {
+  attachmentsByArticleId?:  {
+    __typename: "ModelAttachmentConnection",
+    items:  Array< {
+      __typename: "Attachment",
+      id: string,
+      postId?: string | null,
+      articleId?: string | null,
+      s3Key: string,
+      s3Bucket: string,
+      fileName: string,
+      fileSize: number,
+      mimeType: string,
+      isEmbedded: boolean,
+      embedLocation?: string | null,
+      uploaderId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type AttachmentsByS3KeyQueryVariables = {
+  s3Key: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelAttachmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type AttachmentsByS3KeyQuery = {
+  attachmentsByS3Key?:  {
+    __typename: "ModelAttachmentConnection",
+    items:  Array< {
+      __typename: "Attachment",
+      id: string,
+      postId?: string | null,
+      articleId?: string | null,
+      s3Key: string,
+      s3Bucket: string,
+      fileName: string,
+      fileSize: number,
+      mimeType: string,
+      isEmbedded: boolean,
+      embedLocation?: string | null,
+      uploaderId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type AttachmentsByUploaderIdQueryVariables = {
+  uploaderId: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelAttachmentFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type AttachmentsByUploaderIdQuery = {
+  attachmentsByUploaderId?:  {
+    __typename: "ModelAttachmentConnection",
+    items:  Array< {
+      __typename: "Attachment",
+      id: string,
+      postId?: string | null,
+      articleId?: string | null,
+      s3Key: string,
+      s3Bucket: string,
+      fileName: string,
+      fileSize: number,
+      mimeType: string,
+      isEmbedded: boolean,
+      embedLocation?: string | null,
+      uploaderId: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetViewCountQueueQueryVariables = {
+  id: string,
+};
+
+export type GetViewCountQueueQuery = {
+  getViewCountQueue?:  {
+    __typename: "ViewCountQueue",
+    id: string,
+    targetType: string,
+    targetId: string,
+    incrementBy: number,
+    processedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListViewCountQueuesQueryVariables = {
+  filter?: ModelViewCountQueueFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListViewCountQueuesQuery = {
+  listViewCountQueues?:  {
+    __typename: "ModelViewCountQueueConnection",
+    items:  Array< {
+      __typename: "ViewCountQueue",
+      id: string,
+      targetType: string,
+      targetId: string,
+      incrementBy: number,
+      processedAt?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ViewCountQueuesByTargetTypeAndCreatedAtQueryVariables = {
+  targetType: string,
+  createdAt?: ModelStringKeyConditionInput | null,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelViewCountQueueFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ViewCountQueuesByTargetTypeAndCreatedAtQuery = {
+  viewCountQueuesByTargetTypeAndCreatedAt?:  {
+    __typename: "ModelViewCountQueueConnection",
+    items:  Array< {
+      __typename: "ViewCountQueue",
+      id: string,
+      targetType: string,
+      targetId: string,
+      incrementBy: number,
+      processedAt?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type ViewCountQueuesByProcessedAtQueryVariables = {
+  processedAt: string,
+  sortDirection?: ModelSortDirection | null,
+  filter?: ModelViewCountQueueFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ViewCountQueuesByProcessedAtQuery = {
+  viewCountQueuesByProcessedAt?:  {
+    __typename: "ModelViewCountQueueConnection",
+    items:  Array< {
+      __typename: "ViewCountQueue",
+      id: string,
+      targetType: string,
+      targetId: string,
+      incrementBy: number,
+      processedAt?: string | null,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
 export type GetDefaultLayoutQueryVariables = {
 };
 
@@ -7006,6 +6998,14 @@ export type GetDefaultLayoutQuery = {
     createdAt: string,
     updatedAt: string,
   } | null,
+};
+
+export type GetUserPermissionsQueryVariables = {
+  userId: string,
+};
+
+export type GetUserPermissionsQuery = {
+  getUserPermissions?: Array< string | null > | null,
 };
 
 export type OnCreateMemberProfileSubscriptionVariables = {
@@ -7399,531 +7399,6 @@ export type OnDeleteRolePermissionSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreatePostTagSubscriptionVariables = {
-  filter?: ModelSubscriptionPostTagFilterInput | null,
-};
-
-export type OnCreatePostTagSubscription = {
-  onCreatePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postId: string,
-    tagId: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    tag?:  {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      slug: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    authorId?: string | null,
-  } | null,
-};
-
-export type OnUpdatePostTagSubscriptionVariables = {
-  filter?: ModelSubscriptionPostTagFilterInput | null,
-};
-
-export type OnUpdatePostTagSubscription = {
-  onUpdatePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postId: string,
-    tagId: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    tag?:  {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      slug: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    authorId?: string | null,
-  } | null,
-};
-
-export type OnDeletePostTagSubscriptionVariables = {
-  filter?: ModelSubscriptionPostTagFilterInput | null,
-};
-
-export type OnDeletePostTagSubscription = {
-  onDeletePostTag?:  {
-    __typename: "PostTag",
-    id: string,
-    postId: string,
-    tagId: string,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    tag?:  {
-      __typename: "Tag",
-      id: string,
-      name: string,
-      slug: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-    authorId?: string | null,
-  } | null,
-};
-
-export type OnCreateMailAccountLinkSubscriptionVariables = {
-  filter?: ModelSubscriptionMailAccountLinkFilterInput | null,
-};
-
-export type OnCreateMailAccountLinkSubscription = {
-  onCreateMailAccountLink?:  {
-    __typename: "MailAccountLink",
-    id: string,
-    calendarId: string,
-    accountType: string,
-    accountEmail: string,
-    encryptedAccessToken: string,
-    encryptedRefreshToken: string,
-    tokenExpiresAt: string,
-    displayName: string,
-    colorHex: string,
-    isActive: boolean,
-    lastSyncedAt?: string | null,
-    lastSyncStatus?: string | null,
-    lastSyncError?: string | null,
-    calendar?:  {
-      __typename: "Calendar",
-      id: string,
-      name: string,
-      description?: string | null,
-      slug: string,
-      defaultView: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    events?:  {
-      __typename: "ModelEventConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateMailAccountLinkSubscriptionVariables = {
-  filter?: ModelSubscriptionMailAccountLinkFilterInput | null,
-};
-
-export type OnUpdateMailAccountLinkSubscription = {
-  onUpdateMailAccountLink?:  {
-    __typename: "MailAccountLink",
-    id: string,
-    calendarId: string,
-    accountType: string,
-    accountEmail: string,
-    encryptedAccessToken: string,
-    encryptedRefreshToken: string,
-    tokenExpiresAt: string,
-    displayName: string,
-    colorHex: string,
-    isActive: boolean,
-    lastSyncedAt?: string | null,
-    lastSyncStatus?: string | null,
-    lastSyncError?: string | null,
-    calendar?:  {
-      __typename: "Calendar",
-      id: string,
-      name: string,
-      description?: string | null,
-      slug: string,
-      defaultView: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    events?:  {
-      __typename: "ModelEventConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteMailAccountLinkSubscriptionVariables = {
-  filter?: ModelSubscriptionMailAccountLinkFilterInput | null,
-};
-
-export type OnDeleteMailAccountLinkSubscription = {
-  onDeleteMailAccountLink?:  {
-    __typename: "MailAccountLink",
-    id: string,
-    calendarId: string,
-    accountType: string,
-    accountEmail: string,
-    encryptedAccessToken: string,
-    encryptedRefreshToken: string,
-    tokenExpiresAt: string,
-    displayName: string,
-    colorHex: string,
-    isActive: boolean,
-    lastSyncedAt?: string | null,
-    lastSyncStatus?: string | null,
-    lastSyncError?: string | null,
-    calendar?:  {
-      __typename: "Calendar",
-      id: string,
-      name: string,
-      description?: string | null,
-      slug: string,
-      defaultView: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    events?:  {
-      __typename: "ModelEventConnection",
-      nextToken?: string | null,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateAttachmentSubscriptionVariables = {
-  filter?: ModelSubscriptionAttachmentFilterInput | null,
-  uploaderId?: string | null,
-};
-
-export type OnCreateAttachmentSubscription = {
-  onCreateAttachment?:  {
-    __typename: "Attachment",
-    id: string,
-    postId?: string | null,
-    articleId?: string | null,
-    s3Key: string,
-    s3Bucket: string,
-    fileName: string,
-    fileSize: number,
-    mimeType: string,
-    isEmbedded: boolean,
-    embedLocation?: string | null,
-    uploaderId: string,
-    uploader?:  {
-      __typename: "MemberProfile",
-      id: string,
-      email: string,
-      displayName: string,
-      avatarS3Key?: string | null,
-      roleId: string,
-      createdAt: string,
-      lastLoginAt?: string | null,
-      isActive: boolean,
-      cachedPermissions?: Array< string | null > | null,
-      permissionsCachedAt?: string | null,
-      updatedAt: string,
-    } | null,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    article?:  {
-      __typename: "Article",
-      id: string,
-      title: string,
-      content: string,
-      slug: string,
-      authorId: string,
-      viewCount: number,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateAttachmentSubscriptionVariables = {
-  filter?: ModelSubscriptionAttachmentFilterInput | null,
-  uploaderId?: string | null,
-};
-
-export type OnUpdateAttachmentSubscription = {
-  onUpdateAttachment?:  {
-    __typename: "Attachment",
-    id: string,
-    postId?: string | null,
-    articleId?: string | null,
-    s3Key: string,
-    s3Bucket: string,
-    fileName: string,
-    fileSize: number,
-    mimeType: string,
-    isEmbedded: boolean,
-    embedLocation?: string | null,
-    uploaderId: string,
-    uploader?:  {
-      __typename: "MemberProfile",
-      id: string,
-      email: string,
-      displayName: string,
-      avatarS3Key?: string | null,
-      roleId: string,
-      createdAt: string,
-      lastLoginAt?: string | null,
-      isActive: boolean,
-      cachedPermissions?: Array< string | null > | null,
-      permissionsCachedAt?: string | null,
-      updatedAt: string,
-    } | null,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    article?:  {
-      __typename: "Article",
-      id: string,
-      title: string,
-      content: string,
-      slug: string,
-      authorId: string,
-      viewCount: number,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteAttachmentSubscriptionVariables = {
-  filter?: ModelSubscriptionAttachmentFilterInput | null,
-  uploaderId?: string | null,
-};
-
-export type OnDeleteAttachmentSubscription = {
-  onDeleteAttachment?:  {
-    __typename: "Attachment",
-    id: string,
-    postId?: string | null,
-    articleId?: string | null,
-    s3Key: string,
-    s3Bucket: string,
-    fileName: string,
-    fileSize: number,
-    mimeType: string,
-    isEmbedded: boolean,
-    embedLocation?: string | null,
-    uploaderId: string,
-    uploader?:  {
-      __typename: "MemberProfile",
-      id: string,
-      email: string,
-      displayName: string,
-      avatarS3Key?: string | null,
-      roleId: string,
-      createdAt: string,
-      lastLoginAt?: string | null,
-      isActive: boolean,
-      cachedPermissions?: Array< string | null > | null,
-      permissionsCachedAt?: string | null,
-      updatedAt: string,
-    } | null,
-    post?:  {
-      __typename: "Post",
-      id: string,
-      boardId: string,
-      categoryId?: string | null,
-      title: string,
-      content: string,
-      authorId: string,
-      viewCount: number,
-      customFieldValues?: string | null,
-      customSort1?: string | null,
-      customSort2?: string | null,
-      customSort3?: string | null,
-      customSort4?: string | null,
-      customSort5?: string | null,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      isPinned: boolean,
-      pinnedStatus: string,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    article?:  {
-      __typename: "Article",
-      id: string,
-      title: string,
-      content: string,
-      slug: string,
-      authorId: string,
-      viewCount: number,
-      publishedAt?: string | null,
-      isPublished: boolean,
-      createdAt: string,
-      updatedAt: string,
-    } | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnCreateViewCountQueueSubscriptionVariables = {
-  filter?: ModelSubscriptionViewCountQueueFilterInput | null,
-};
-
-export type OnCreateViewCountQueueSubscription = {
-  onCreateViewCountQueue?:  {
-    __typename: "ViewCountQueue",
-    id: string,
-    targetType: string,
-    targetId: string,
-    incrementBy: number,
-    processedAt?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnUpdateViewCountQueueSubscriptionVariables = {
-  filter?: ModelSubscriptionViewCountQueueFilterInput | null,
-};
-
-export type OnUpdateViewCountQueueSubscription = {
-  onUpdateViewCountQueue?:  {
-    __typename: "ViewCountQueue",
-    id: string,
-    targetType: string,
-    targetId: string,
-    incrementBy: number,
-    processedAt?: string | null,
-    createdAt: string,
-    updatedAt: string,
-  } | null,
-};
-
-export type OnDeleteViewCountQueueSubscriptionVariables = {
-  filter?: ModelSubscriptionViewCountQueueFilterInput | null,
-};
-
-export type OnDeleteViewCountQueueSubscription = {
-  onDeleteViewCountQueue?:  {
-    __typename: "ViewCountQueue",
-    id: string,
-    targetType: string,
-    targetId: string,
-    incrementBy: number,
-    processedAt?: string | null,
     createdAt: string,
     updatedAt: string,
   } | null,
@@ -8838,6 +8313,144 @@ export type OnDeleteTagSubscription = {
   } | null,
 };
 
+export type OnCreatePostTagSubscriptionVariables = {
+  filter?: ModelSubscriptionPostTagFilterInput | null,
+};
+
+export type OnCreatePostTagSubscription = {
+  onCreatePostTag?:  {
+    __typename: "PostTag",
+    id: string,
+    postId: string,
+    tagId: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    tag?:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      slug: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    authorId?: string | null,
+  } | null,
+};
+
+export type OnUpdatePostTagSubscriptionVariables = {
+  filter?: ModelSubscriptionPostTagFilterInput | null,
+};
+
+export type OnUpdatePostTagSubscription = {
+  onUpdatePostTag?:  {
+    __typename: "PostTag",
+    id: string,
+    postId: string,
+    tagId: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    tag?:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      slug: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    authorId?: string | null,
+  } | null,
+};
+
+export type OnDeletePostTagSubscriptionVariables = {
+  filter?: ModelSubscriptionPostTagFilterInput | null,
+};
+
+export type OnDeletePostTagSubscription = {
+  onDeletePostTag?:  {
+    __typename: "PostTag",
+    id: string,
+    postId: string,
+    tagId: string,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    tag?:  {
+      __typename: "Tag",
+      id: string,
+      name: string,
+      slug: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+    authorId?: string | null,
+  } | null,
+};
+
 export type OnCreateCommentSubscriptionVariables = {
   filter?: ModelSubscriptionCommentFilterInput | null,
   authorId?: string | null,
@@ -9342,5 +8955,392 @@ export type OnDeleteEventSubscription = {
     createdAt: string,
     updatedAt: string,
     lastSyncedAt?: string | null,
+  } | null,
+};
+
+export type OnCreateMailAccountLinkSubscriptionVariables = {
+  filter?: ModelSubscriptionMailAccountLinkFilterInput | null,
+};
+
+export type OnCreateMailAccountLinkSubscription = {
+  onCreateMailAccountLink?:  {
+    __typename: "MailAccountLink",
+    id: string,
+    calendarId: string,
+    accountType: string,
+    accountEmail: string,
+    encryptedAccessToken: string,
+    encryptedRefreshToken: string,
+    tokenExpiresAt: string,
+    displayName: string,
+    colorHex: string,
+    isActive: boolean,
+    lastSyncedAt?: string | null,
+    lastSyncStatus?: string | null,
+    lastSyncError?: string | null,
+    calendar?:  {
+      __typename: "Calendar",
+      id: string,
+      name: string,
+      description?: string | null,
+      slug: string,
+      defaultView: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    events?:  {
+      __typename: "ModelEventConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateMailAccountLinkSubscriptionVariables = {
+  filter?: ModelSubscriptionMailAccountLinkFilterInput | null,
+};
+
+export type OnUpdateMailAccountLinkSubscription = {
+  onUpdateMailAccountLink?:  {
+    __typename: "MailAccountLink",
+    id: string,
+    calendarId: string,
+    accountType: string,
+    accountEmail: string,
+    encryptedAccessToken: string,
+    encryptedRefreshToken: string,
+    tokenExpiresAt: string,
+    displayName: string,
+    colorHex: string,
+    isActive: boolean,
+    lastSyncedAt?: string | null,
+    lastSyncStatus?: string | null,
+    lastSyncError?: string | null,
+    calendar?:  {
+      __typename: "Calendar",
+      id: string,
+      name: string,
+      description?: string | null,
+      slug: string,
+      defaultView: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    events?:  {
+      __typename: "ModelEventConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteMailAccountLinkSubscriptionVariables = {
+  filter?: ModelSubscriptionMailAccountLinkFilterInput | null,
+};
+
+export type OnDeleteMailAccountLinkSubscription = {
+  onDeleteMailAccountLink?:  {
+    __typename: "MailAccountLink",
+    id: string,
+    calendarId: string,
+    accountType: string,
+    accountEmail: string,
+    encryptedAccessToken: string,
+    encryptedRefreshToken: string,
+    tokenExpiresAt: string,
+    displayName: string,
+    colorHex: string,
+    isActive: boolean,
+    lastSyncedAt?: string | null,
+    lastSyncStatus?: string | null,
+    lastSyncError?: string | null,
+    calendar?:  {
+      __typename: "Calendar",
+      id: string,
+      name: string,
+      description?: string | null,
+      slug: string,
+      defaultView: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    events?:  {
+      __typename: "ModelEventConnection",
+      nextToken?: string | null,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateAttachmentSubscriptionVariables = {
+  filter?: ModelSubscriptionAttachmentFilterInput | null,
+  uploaderId?: string | null,
+};
+
+export type OnCreateAttachmentSubscription = {
+  onCreateAttachment?:  {
+    __typename: "Attachment",
+    id: string,
+    postId?: string | null,
+    articleId?: string | null,
+    s3Key: string,
+    s3Bucket: string,
+    fileName: string,
+    fileSize: number,
+    mimeType: string,
+    isEmbedded: boolean,
+    embedLocation?: string | null,
+    uploaderId: string,
+    uploader?:  {
+      __typename: "MemberProfile",
+      id: string,
+      email: string,
+      displayName: string,
+      avatarS3Key?: string | null,
+      roleId: string,
+      createdAt: string,
+      lastLoginAt?: string | null,
+      isActive: boolean,
+      cachedPermissions?: Array< string | null > | null,
+      permissionsCachedAt?: string | null,
+      updatedAt: string,
+    } | null,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      slug: string,
+      authorId: string,
+      viewCount: number,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateAttachmentSubscriptionVariables = {
+  filter?: ModelSubscriptionAttachmentFilterInput | null,
+  uploaderId?: string | null,
+};
+
+export type OnUpdateAttachmentSubscription = {
+  onUpdateAttachment?:  {
+    __typename: "Attachment",
+    id: string,
+    postId?: string | null,
+    articleId?: string | null,
+    s3Key: string,
+    s3Bucket: string,
+    fileName: string,
+    fileSize: number,
+    mimeType: string,
+    isEmbedded: boolean,
+    embedLocation?: string | null,
+    uploaderId: string,
+    uploader?:  {
+      __typename: "MemberProfile",
+      id: string,
+      email: string,
+      displayName: string,
+      avatarS3Key?: string | null,
+      roleId: string,
+      createdAt: string,
+      lastLoginAt?: string | null,
+      isActive: boolean,
+      cachedPermissions?: Array< string | null > | null,
+      permissionsCachedAt?: string | null,
+      updatedAt: string,
+    } | null,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      slug: string,
+      authorId: string,
+      viewCount: number,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteAttachmentSubscriptionVariables = {
+  filter?: ModelSubscriptionAttachmentFilterInput | null,
+  uploaderId?: string | null,
+};
+
+export type OnDeleteAttachmentSubscription = {
+  onDeleteAttachment?:  {
+    __typename: "Attachment",
+    id: string,
+    postId?: string | null,
+    articleId?: string | null,
+    s3Key: string,
+    s3Bucket: string,
+    fileName: string,
+    fileSize: number,
+    mimeType: string,
+    isEmbedded: boolean,
+    embedLocation?: string | null,
+    uploaderId: string,
+    uploader?:  {
+      __typename: "MemberProfile",
+      id: string,
+      email: string,
+      displayName: string,
+      avatarS3Key?: string | null,
+      roleId: string,
+      createdAt: string,
+      lastLoginAt?: string | null,
+      isActive: boolean,
+      cachedPermissions?: Array< string | null > | null,
+      permissionsCachedAt?: string | null,
+      updatedAt: string,
+    } | null,
+    post?:  {
+      __typename: "Post",
+      id: string,
+      boardId: string,
+      categoryId?: string | null,
+      title: string,
+      content: string,
+      authorId: string,
+      viewCount: number,
+      customFieldValues?: string | null,
+      customSort1?: string | null,
+      customSort2?: string | null,
+      customSort3?: string | null,
+      customSort4?: string | null,
+      customSort5?: string | null,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      isPinned: boolean,
+      pinnedStatus: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    article?:  {
+      __typename: "Article",
+      id: string,
+      title: string,
+      content: string,
+      slug: string,
+      authorId: string,
+      viewCount: number,
+      publishedAt?: string | null,
+      isPublished: boolean,
+      createdAt: string,
+      updatedAt: string,
+    } | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateViewCountQueueSubscriptionVariables = {
+  filter?: ModelSubscriptionViewCountQueueFilterInput | null,
+};
+
+export type OnCreateViewCountQueueSubscription = {
+  onCreateViewCountQueue?:  {
+    __typename: "ViewCountQueue",
+    id: string,
+    targetType: string,
+    targetId: string,
+    incrementBy: number,
+    processedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateViewCountQueueSubscriptionVariables = {
+  filter?: ModelSubscriptionViewCountQueueFilterInput | null,
+};
+
+export type OnUpdateViewCountQueueSubscription = {
+  onUpdateViewCountQueue?:  {
+    __typename: "ViewCountQueue",
+    id: string,
+    targetType: string,
+    targetId: string,
+    incrementBy: number,
+    processedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteViewCountQueueSubscriptionVariables = {
+  filter?: ModelSubscriptionViewCountQueueFilterInput | null,
+};
+
+export type OnDeleteViewCountQueueSubscription = {
+  onDeleteViewCountQueue?:  {
+    __typename: "ViewCountQueue",
+    id: string,
+    targetType: string,
+    targetId: string,
+    incrementBy: number,
+    processedAt?: string | null,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };

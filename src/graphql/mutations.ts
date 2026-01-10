@@ -8,27 +8,6 @@ type GeneratedMutation<InputType, OutputType> = string & {
   __generatedMutationOutput: OutputType;
 };
 
-export const checkPermission = /* GraphQL */ `mutation CheckPermission(
-  $userId: ID!
-  $permissionKey: String!
-  $resourceId: ID
-  $resourceType: String
-) {
-  checkPermission(
-    userId: $userId
-    permissionKey: $permissionKey
-    resourceId: $resourceId
-    resourceType: $resourceType
-  ) {
-    allowed
-    reason
-    __typename
-  }
-}
-` as GeneratedMutation<
-  APITypes.CheckPermissionMutationVariables,
-  APITypes.CheckPermissionMutation
->;
 export const createMemberProfile = /* GraphQL */ `mutation CreateMemberProfile(
   $input: CreateMemberProfileInput!
   $condition: ModelMemberProfileConditionInput
@@ -2477,4 +2456,25 @@ export const incrementViewCount = /* GraphQL */ `mutation IncrementViewCount($ta
 ` as GeneratedMutation<
   APITypes.IncrementViewCountMutationVariables,
   APITypes.IncrementViewCountMutation
+>;
+export const checkPermission = /* GraphQL */ `mutation CheckPermission(
+  $userId: ID!
+  $permissionKey: String!
+  $resourceId: ID
+  $resourceType: String
+) {
+  checkPermission(
+    userId: $userId
+    permissionKey: $permissionKey
+    resourceId: $resourceId
+    resourceType: $resourceType
+  ) {
+    allowed
+    reason
+    __typename
+  }
+}
+` as GeneratedMutation<
+  APITypes.CheckPermissionMutationVariables,
+  APITypes.CheckPermissionMutation
 >;

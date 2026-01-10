@@ -62,5 +62,41 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
+  },
+  "function": {
+    "postConfirmationTrigger": {
+      "build": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "GraphQLAPIIdOutput",
+            "GraphQLAPIEndpointOutput",
+            "GraphQLAPIKeyOutput"
+          ],
+          "category": "api",
+          "resourceName": "cmsapi"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_postConfirmationTrigger_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "postConfirmationTrigger"
+        }
+      ]
+    },
+    "AMPLIFY_function_postConfirmationTrigger_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "postConfirmationTrigger"
+        }
+      ]
+    }
   }
 }
